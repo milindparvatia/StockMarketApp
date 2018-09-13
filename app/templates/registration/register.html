@@ -1,0 +1,24 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container body-content">
+<body>
+
+    {% if next%}
+    <p>Hey,you can't access.</p>
+    {% endif %}
+    
+    <h1>Registration Page!</h1><br>
+    
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+        <p>There's something wrong with what you entered!</p>
+        {% endif %}
+
+        {{form.as_ul}}        
+        <p><input type="submit" value="login"></p>
+    </form>
+</body>
+</div>
+{% endblock %}
