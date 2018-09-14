@@ -3,12 +3,14 @@
 {% block content %}
 <div class="container body-content">
 <body class="text-center">
+    <br>
     {% if form.errors %}
-    <p>There's something wrong with what you entered!</p>
+    <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
     {% endif %}
-    <h1>Login Page!</h1><br><br>
+    <h1>Login Page</h1><br><br>
     {% if next%}
-    <p>Hey,you can't access.</p>
+    <p>Please login to see this page.</p>
     {% endif %}
 
     <form action="{% url 'login' %}" method="post">
@@ -18,6 +20,10 @@
         <p><input type="submit" value="Login"></p>
         <input type="hidden" name="next" value="{{next}}">
     </form>
+
+    {# Assumes you setup the password_reset view in your URLconf #}
+    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    
     <a class="nav-link" href="..\..\register">register</a>
 </body>
 </div>
