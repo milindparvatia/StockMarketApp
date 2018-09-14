@@ -122,5 +122,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGIN_REDIRECT_URL = '/'
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())

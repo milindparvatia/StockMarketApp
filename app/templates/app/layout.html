@@ -54,36 +54,39 @@
 
 <body>
    
-        <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-        {
-        "symbols": [
-          {
-            "description": "RELIANCE",
-            "proName": "NSE:RELIANCE"
-          },
-          {
-            "description": "TCS",
-            "proName": "NSE:TCS"
-          },
-          {
-            "description": "INFOSYS",
-            "proName": "NSE:INFY"
-          },
-          {
-            "description": "HDFC",
-            "proName": "BSE:HDFCBANK"
-          },
-          {
-            "description": "TATASTEEL",
-            "proName": "BSE:TATASTEEL"
-          }
-        ],
-        "locale": "in"
-      }
-        </script>
-      </div>
+  <!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+  {
+  "symbols": [
+    {
+      "description": "RELIANCE",
+      "proName": "NSE:RELIANCE"
+    },
+    {
+      "description": "TCS",
+      "proName": "NSE:TCS"
+    },
+    {
+      "description": "INFOSYS",
+      "proName": "NSE:INFY"
+    },
+    {
+      "description": "HDFC",
+      "proName": "BSE:HDFCBANK"
+    },
+    {
+      "description": "TATASTEEL",
+      "proName": "BSE:TATASTEEL"
+    }
+  ],
+  "locale": "in",
+  "linkPageTemplate": "https://stockpredictorapp.herokuapp.com/"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="..\">Stock Predictor</a>
@@ -236,13 +239,13 @@
                         Hello {{user.username}}
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="..\accounts/logout">Log out</a>
+                        <a class="dropdown-item" href="..\..\accounts/logout">Log out</a>
                       </div>
                   </li>
                   
                   {% else %}
                   <li class="nav-item">
-                    <a class="nav-link active" href="..\accounts/login">Log in</a>
+                    <a class="nav-link active" href="..\..\accounts/login">Log in</a>
                   </li>
                 {% endif %}
           </ul>
