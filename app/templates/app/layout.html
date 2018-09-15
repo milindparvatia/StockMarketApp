@@ -55,7 +55,7 @@
 <body>
    
   <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
   {
@@ -82,7 +82,7 @@
     }
   ],
   "locale": "in",
-  "linkPageTemplate": "https://stockpredictorapp.herokuapp.com/"
+  "linkPageTemplate": "https://stockpredictorapp.herokuapp.com"
 }
   </script>
 </div>
@@ -105,16 +105,12 @@
                 <a class="nav-link" href="..\..\about">About</a>
               </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" action="/search/" method="post" autocomplete="off">
-              {% csrf_token %}
-              <!-- <form autocomplete="off"> -->
+
+            <form class="form-inline my-2 my-lg-0" action="/search/" method="GET" autocomplete="off">           
                 <div class="autocomplete">
-                  <input id="result" type="text" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" name="search" value="{{ current_name }}">
+                  <input id="result" type="text" class="form-control mr-sm-2" placeholder="Search GET" aria-label="Search GET" name="tvwidgetsymbol" value="{{ current_name }}">
                 </div>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              <!-- </form> -->
-              <!-- <input id="result" type="text" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" name="search" value="{{ current_name }}">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
             <script>
               function autocomplete(inp, arr) {

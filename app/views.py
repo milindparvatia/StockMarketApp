@@ -14,43 +14,72 @@ import numpy as np
 from .forms import NameForm
 from twitterscraper import query_tweets
 import os
-
+from urllib.parse import unquote
 
 def get_name(request):
     # if this is a POST request we need to process the form data
-    if request.method == 'POST':
+    if request.GET.get('tvwidgetsymbol'):
         # create a form instance and populate it with data from the request:
-        form = NameForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            valArray = form.cleaned_data['search']
-            Array = valArray.split(":")
-            value = Array[1]
-            val = form.cleaned_data['search']
-            with open('searchVal.txt','w+') as f:
-                #convert to string:
-                f.seek(0)
-                f.write(val)
-                f.truncate()
-                f.close()
-            # redirect to a new URL:
-            url = ('https://newsapi.org/v2/everything?q="'+value+'"&apiKey=4df8d4c46e5f41bca7e6e1331b63ad7d')
-            response = requests.get(url)
-            geodata = response.json()
+        dataval = request.GET['tvwidgetsymbol']
+        # process the data in form.cleaned_data as required
+        valArray = unquote(dataval)
+        Array = valArray.split(":")
+        value = Array[1]
+        val = valArray
+        with open('searchVal.txt','w+') as f:
+            #convert to string:
+            f.seek(0)
+            f.write(val)
+            f.truncate()
+            f.close()
+        # redirect to a new URL:
+        url = ('https://newsapi.org/v2/everything?q="'+value+'"&apiKey=4df8d4c46e5f41bca7e6e1331b63ad7d')
+        response = requests.get(url)
+        geodata = response.json()
             
-            return render(request, 'app/search.html', {'allnews': geodata['articles'],'val': val})
-            
-    # if a GET (or any other method) we'll create a blank form
+        return render(request, 'app/search.html', {'allnews': geodata['articles'],'val': val})
     else:
         form = NameForm()
         return render(request, 'app/name.html', {'form': form})
+
+# def get_name(request):
+#     # if this is a POST request we need to process the form data
+#     if request.method == 'POST':
+#         # create a form instance and populate it with data from the request:
+#         form = NameForm(request.POST)
+#         # check whether it's valid:
+#         if form.is_valid():
+#             # process the data in form.cleaned_data as required
+#             valArray = form.cleaned_data['search']
+#             Array = valArray.split(":")
+#             value = Array[1]
+#             val = form.cleaned_data['search']
+#             with open('searchVal.txt','w+') as f:
+#                 #convert to string:
+#                 f.seek(0)
+#                 f.write(val)
+#                 f.truncate()
+#                 f.close()
+#             # redirect to a new URL:
+#             url = ('https://newsapi.org/v2/everything?q="'+value+'"&apiKey=4df8d4c46e5f41bca7e6e1331b63ad7d')
+#             response = requests.get(url)
+#             geodata = response.json()
+            
+#             return render(request, 'app/search.html', {'allnews': geodata['articles'],'val': val})
+            
+#     # if a GET (or any other method) we'll create a blank form
+#     else:
+#         form = NameForm()
+#         return render(request, 'app/name.html', {'form': form})
 
 class TimeSeriesDailyAdjusted(APIView):
     authentication_classes = []
     permission_classes = []
         
     def get(self, request, format=None):
+        # create a form instance and populate it with data from the request: 
+        dataval = self.request.query_params.get('tvwidgetsymbol')
+        # dataval = unquote(dataval)
         search_val = open('searchVal.txt','r').read()
         data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
@@ -66,7 +95,7 @@ class TimeSeriesDailyAdjusted(APIView):
 
         default_items = data
         alldata = {
-                "default": default_items,
+            "default": default_items,
         }
         return Response(alldata)
 
