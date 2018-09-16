@@ -1,0 +1,229 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h1 class="display-4 text-center">{{val}}</h1>
+<br>
+<div id="progress" class="display-4 text-center">
+        <svg width="200px"  height="200px"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-rolling" style="background: none;"><circle cx="50" cy="50" fill="none" ng-attr-stroke="{{config.color}}" ng-attr-stroke-width="{{config.width}}" ng-attr-r="{{config.radius}}" ng-attr-stroke-dasharray="{{config.dasharray}}" stroke="#28292f" stroke-width="5" r="40" stroke-dasharray="188.49555921538757 64.83185307179586" transform="rotate(191.92 50 50)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animateTransform></circle></svg>
+</div>
+        <div id="plotly-div"></div>
+
+        <div id="myDiv"></div>
+
+        <br><br>
+<!-- {% for tweet in jsonval %}
+<li>{{tweet.text}}</li>
+{% endfor %} -->
+<div id="news">
+    <div class="card-columns">
+        <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/1544_RC03/embed_loader.js"></script> 
+        <script type="text/javascript"> 
+            trends.embed.renderExploreWidget("TIMESERIES", 
+                {
+                    "comparisonItem":[
+                    {
+                        "keyword":"{{val}}",
+                        "geo":"",
+                        "time":"today 12-m"
+                    }
+                    ],
+                    "category":0,"property":""
+                },
+                {
+                    "exploreQuery":"q={{val}}&date=today 12-m,today 12-m","guestPath":"https://trends.google.com:443/trends/embed/"
+                }); 
+        </script> 
+        {% for ip in allnews %}
+            <a href="{{ip.url}}">
+                <div class="card">
+                        <img class="card-img-top" src="{{ip.urlToImage}}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ip.source.name}}</h5>
+                            <p class="card-text">{{ip.description}}.</p>
+                            <p class="card-text"><small class="text-muted">by {{ip.author}}</small></p>
+                        <footer class="blockquote-footer">
+                            <small>
+                                Someone famous in <cite title="{{ip.publishedAt}}">{{ip.publishedAt}}</cite>
+                            </small>
+                        </footer>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+  <script>
+    {% block jquery %}
+    var endpoint1 = '/api/chart/TimeSeriesDailyAdjusted/'
+    var defaultData = [];
+    var defaultDataMACD = [];
+    var news = []; 
+
+        $.ajax({
+                    method: "GET",
+                    url: endpoint1,
+                success: function(alldata){
+                    defaultData = alldata.defaultDaily
+                    defaultDataMACD = alldata.defaultMACD                
+                    setChart1()
+                    setChart2()
+                    setChart3()
+                    setChartMACD()
+                    $("#progress").hide()
+                },
+                error: function(error_data){
+                    console.log("error")
+                    console.log(error_data)
+                }
+            });
+                
+            function setChartMACD(){
+                var trace1 = {
+                x: defaultDataMACD.date,
+                y: defaultDataMACD.MACD_Hist,
+                fill: 'tozeroy',
+                type: 'scatter',
+                mode: 'none'
+                };
+
+                var trace2 = {
+                x: defaultDataMACD.date,
+                y: defaultDataMACD.MACD,
+                type: 'scatter',
+                mode: 'none'
+                };
+
+                var trace3 = {
+                x: defaultDataMACD.date,
+                y: defaultDataMACD.MACD_Signal,
+                type: 'scatter',
+                mode: 'none'
+                };
+
+                var layout = {
+                title: 'MACD Chart Without Boundary Lines'
+                };
+
+                var data = [trace1,trace2,trace3];
+
+                Plotly.newPlot('myDiv', data, layout);
+            }
+
+            function setChart1() {
+                var data = [
+                {
+                    x: defaultData.date,
+                    y: defaultData.close,
+                    type: 'scatter'
+                }
+                ];
+
+                Plotly.newPlot('plotly-div', data);
+            }
+            
+            function setChart2(){
+            var trace1 = {
+            x: defaultData.date, 
+            close: defaultData.close, 
+            decreasing: {line: {color: '#7F7F7F'}}, 
+            high:  defaultData.high,
+            increasing: {line: {color: '#17BECF'}}, 
+            line: {color: 'rgba(31,119,180,1)'}, 
+            low:  defaultData.low,
+            open:  defaultData.open,
+            type: 'candlestick', 
+            xaxis: 'x', 
+            yaxis: 'y'
+            };
+
+            var data = [trace1];
+
+            var layout = {
+            dragmode: 'zoom', 
+            margin: {
+                r: 10, 
+                t: 25, 
+                b: 40, 
+                l: 60
+            }, 
+            showlegend: false, 
+            xaxis: {
+                autorange: true, 
+                domain: [0, 1], 
+                range: ['1995-01-03 12:00', '2017-02-15 12:00'],
+                rangeselector: {buttons: [
+                {
+                    count: 1,
+                    label: '1m',
+                    step: 'month',
+                    stepmode: 'backward'
+                },
+                {
+                    count: 6,
+                    label: '6m',
+                    step: 'month',
+                    stepmode: 'backward'
+                },
+                {step: 'all'}
+                ]},
+        
+                title: 'Date', 
+                type: 'date'
+            }, 
+            yaxis: {
+                autorange: true, 
+                domain: [0, 1], 
+                range: [114.609999778, 137.410004222], 
+                type: 'linear'
+            }
+            };
+
+            Plotly.plot('plotly-div', data, layout);    
+        }
+
+        function setChart3(){
+        var trace1 = {
+        x: defaultData.date, 
+        close: defaultData.close, 
+        decreasing: {line: {color: '#7F7F7F'}}, 
+        high: defaultData.high, 
+        increasing: {line: {color: '#17BECF'}}, 
+        line: {color: 'rgba(31,119,180,1)'}, 
+        low: defaultData.low, 
+        open: defaultData.open,
+        type: 'ohlc', 
+        xaxis: 'x', 
+        yaxis: 'y'
+        };
+
+        var data = [trace1];
+
+        var layout = {
+        dragmode: 'zoom', 
+        margin: {
+            r: 10, 
+            t: 25, 
+            b: 40, 
+            l: 60
+        }, 
+        showlegend: false, 
+        xaxis: {
+            autorange: true, 
+            rangeslider: {range: ['2017-01-17 12:00', '2017-02-10 12:00']}, 
+            title: 'Date', 
+            type: 'date'
+        }, 
+        yaxis: {
+            autorange: true, 
+            type: 'linear'
+        }
+        };
+
+        Plotly.plot('plotly-div', data, layout);
+    }
+    {% endblock %}          
+</script>
+    
+{% endblock %}
