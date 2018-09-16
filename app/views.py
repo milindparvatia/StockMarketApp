@@ -81,6 +81,7 @@ class TimeSeriesDailyAdjusted(APIView):
         dataval = self.request.query_params.get('tvwidgetsymbol')
         # dataval = unquote(dataval)
         search_val = open('searchVal.txt','r').read()
+        
         data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Time Series (Daily)']
@@ -91,21 +92,8 @@ class TimeSeriesDailyAdjusted(APIView):
                 data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['6. volume'])]
                 df.loc[-1,:]=data_row
                 df.index=df.index+1
-        data=df.sort_values('date')
+        dataDaily=df.sort_values('date')
 
-        default_items = data
-        alldata = {
-            "default": default_items,
-        }
-        return Response(alldata)
-
-
-class MACD(APIView):
-    authentication_classes = []
-    permission_classes = []
-        
-    def get(self, request, format=None):
-        search_val = open('searchVal.txt','r').read()
         data=requests.get('https://www.alphavantage.co/query?function=MACD&symbol='+search_val+'&interval=daily&series_type=open&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Technical Analysis: MACD']
@@ -115,13 +103,39 @@ class MACD(APIView):
             data_row=[date,float(p['MACD_Signal']),float(p['MACD']),float(p['MACD_Hist'])]
             df.loc[-1,:]=data_row
             df.index=df.index+1
-        data=df.sort_values('date')
+        dataMACD=df.sort_values('date')
 
-        default_items = data
+        defaultDaily = dataDaily
+        defaultMACD = dataMACD
         alldata = {
-                "default": default_items,
+            "defaultDaily": defaultDaily,
+            "defaultMACD": defaultMACD,
         }
         return Response(alldata)
+
+
+# class MACD(APIView):
+#     authentication_classes = []
+#     permission_classes = []
+        
+#     def get(self, request, format=None):
+#         search_val = open('searchVal.txt','r').read()
+#         data=requests.get('https://www.alphavantage.co/query?function=MACD&symbol='+search_val+'&interval=daily&series_type=open&apikey=6G6EDTRGV2N1F9SP')
+#         data=data.json()
+#         data=data['Technical Analysis: MACD']
+#         df=pd.DataFrame(columns=['date','MACD_Signal','MACD','MACD_Hist'])
+#         for d,p in data.items():
+#             date=datetime.datetime.strptime(d,'%Y-%m-%d')
+#             data_row=[date,float(p['MACD_Signal']),float(p['MACD']),float(p['MACD_Hist'])]
+#             df.loc[-1,:]=data_row
+#             df.index=df.index+1
+#         data=df.sort_values('date')
+
+#         default_items = data
+#         alldata = {
+#                 "default": default_items,
+#         }
+#         return Response(alldata)
 
 class Tweeter(APIView):
     authentication_classes = []

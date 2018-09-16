@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 
-from .views import TimeSeriesDailyAdjusted,MACD
+from .views import TimeSeriesDailyAdjusted
+# ,MACD
 # Tweeter
 
 urlpatterns = [
@@ -17,6 +18,6 @@ urlpatterns = [
     path('search/', views.get_name, name='get_name'),
     path('search/', views.search, name='search'),
     path('api/chart/TimeSeriesDailyAdjusted/', TimeSeriesDailyAdjusted.as_view()),
-    path('api/chart/MACD/', MACD.as_view()),
+    # path('api/chart/MACD/', MACD.as_view()),
     # path('api/chart/Tweeter/', Tweeter.as_view()),
 ]
