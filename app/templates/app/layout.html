@@ -88,7 +88,7 @@
 </div>
 <!-- TradingView Widget END -->
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
         <a class="navbar-brand" href="..\">Stock Predictor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -247,14 +247,13 @@
         </form>
         </div>
       </nav>
-
-    <div class="container body-content">
-        <br>
         {% block content %}{% endblock %}
         <hr/>
-        <footer>
-            <p>&copy; 2018  - Stock Predictor</p>
-        </footer>
+        <div class="container body-content">
+          <footer>
+              <p>&copy; 2018  - Stock Predictor</p>
+          </footer>
+        </div>
     </div>
     <script>
         $(document).ready(function(){
