@@ -13,6 +13,7 @@
 
         <div id="myDiv"></div>
 
+        <div id="myGauge"></div>
         <br><br>
 
 
@@ -37,7 +38,7 @@
                     {
                         "exploreQuery":"q={{val}}&date=today 12-m,today 12-m","guestPath":"https://trends.google.com:443/trends/embed/"
                     });
-            </script> 
+            </script>
             {% for ip in allnews %}
                 <a href="{{ip.url}}">
                     <div class="card">
@@ -71,11 +72,12 @@
                     url: endpoint1,
                 success: function(alldata){
                     defaultData = alldata.defaultDaily
-                    defaultDataMACD = alldata.defaultMACD                
+                    defaultDataMACD = alldata.defaultMACD              
                     setChart1()
                     setChart2()
                     setChart3()
                     setChartMACD()
+                    setGauge()
                     $("#progress").hide()
                 },
                 error: function(error_data){
@@ -83,69 +85,94 @@
                     console.log(error_data)
                 }
             });
-            
-            (function() {
-                var d3 = Plotly.d3;
 
-                var WIDTH_IN_PERCENT_OF_PARENT = 60,
-                    HEIGHT_IN_PERCENT_OF_PARENT = 80;
+            function setGauge(){
+                // Enter a speed between 0 and 180
+                var level = 75;
 
-                var gd3 = d3.select('body')
-                    .append('div')
-                    .style({
-                        width: WIDTH_IN_PERCENT_OF_PARENT + '%',
-                        'margin-left': (100 - WIDTH_IN_PERCENT_OF_PARENT) / 2 + '%',
+                // Trig to calc meter point
+                var degrees = 180 - level,
+                    radius = .5;
+                var radians = degrees * Math.PI / 180;
+                var x = radius * Math.cos(radians);
+                var y = radius * Math.sin(radians);
 
-                        height: HEIGHT_IN_PERCENT_OF_PARENT + 'vh',
-                        'margin-top': (100 - HEIGHT_IN_PERCENT_OF_PARENT) / 2 + 'vh'
-                    });
+                // Path: may have to change to create a better triangle
+                var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
+                    pathX = String(x),
+                    space = ' ',
+                    pathY = String(y),
+                    pathEnd = ' Z';
+                var path = mainPath.concat(pathX,space,pathY,pathEnd);
 
-                var gd = gd3.node();
+                var data = [{ type: 'scatter',
+                x: [0], y:[0],
+                    marker: {size: 28, color:'850000'},
+                    showlegend: false,
+                    name: 'speed',
+                    text: level,
+                    hoverinfo: 'text+name'},
+                { values: [50/5, 50/5, 50/5, 50/5, 50/5, 50],
+                rotation: 90,
+                text: ['Strong Buy', 'Buy', 'Neutral', 'Sell',
+                            'Strong Sell', '', ''],
+                textinfo: 'text',
+                textposition:'inside',
+                marker: {colors:['rgba(110, 154, 22, .5)',
+                                        'rgba(170, 202, 42, .5)', 'rgba(202, 209, 95, .5)',
+                                        'rgba(210, 206, 145, .5)', 'rgba(232, 226, 202, .5)',
+                                        'rgba(255, 255, 255, 0)']},
+                labels: ['144-180', '108-144', '72-108', '37-72', '0-36', ''],
+                hoverinfo: 'label',
+                hole: .5,
+                type: 'pie',
+                showlegend: false
+                }];
 
-                Plotly.plot(gd, [{
-                    type: 'bar',
-                    x: [1, 2, 3, 4],
-                    y: [5, 10, 2, 8],
-                    marker: {
-                        color: '#C8A2C8',
-                        line: {
-                            width: 2.5
-                        }
+                var layout = {
+                shapes:[{
+                    type: 'path',
+                    path: path,
+                    fillcolor: '850000',
+                    line: {
+                        color: '850000'
                     }
-                }], {
-                    title: 'Auto-Resize',
-                    font: {
-                        size: 16
-                    }
-                });
-
-                window.onresize = function() {
-                    Plotly.Plots.resize(gd);
+                    }],
+                title: 'Gauge',
+                Speed: '0-100',
+                height: 500,
+                width: 500,
+                xaxis: {zeroline:false, showticklabels:false,
+                            showgrid: false, range: [-1, 1]},
+                yaxis: {zeroline:false, showticklabels:false,
+                            showgrid: false, range: [-1, 1]}
                 };
 
-                })();
-
+                Plotly.newPlot('myGauge', data, layout);
+            }
             function setChartMACD(){
                 var trace1 = {
                 x: defaultDataMACD.date,
                 y: defaultDataMACD.MACD_Hist,
-                fill: 'tozeroy',
-                type: 'scatter',
-                mode: 'none'
+                type: 'bar',
+                color: '#00b359',
+                name: 'Histograme'
                 };
 
                 var trace2 = {
                 x: defaultDataMACD.date,
                 y: defaultDataMACD.MACD,
-                type: 'scatter',
-                mode: 'none'
+                type: "scatter",
+                mode: "lines",
+                name: 'MACD'
                 };
 
                 var trace3 = {
                 x: defaultDataMACD.date,
                 y: defaultDataMACD.MACD_Signal,
-                type: 'scatter',
-                mode: 'none'
+                type: "scatter",
+                mode: "lines",
+                name: 'MACD signal'
                 };
 
                 var layout = {

@@ -82,7 +82,7 @@ class TimeSeriesDailyAdjusted(APIView):
         # dataval = unquote(dataval)
         search_val = open('searchVal.txt','r').read()
         
-        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
+        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=compact&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Time Series (Daily)']
         df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
