@@ -5,7 +5,7 @@
 <div class="container body-content">    
 <br>
 <h1 class="display-4 text-center">{{val}}</h1>
-<br>
+
 <div id="progress" class="display-4 text-center">
         <svg width="200px"  height="200px"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-rolling" style="background: none;"><circle cx="50" cy="50" fill="none" ng-attr-stroke="{{config.color}}" ng-attr-stroke-width="{{config.width}}" ng-attr-r="{{config.radius}}" ng-attr-stroke-dasharray="{{config.dasharray}}" stroke="#28292f" stroke-width="5" r="40" stroke-dasharray="188.49555921538757 64.83185307179586" transform="rotate(191.92 50 50)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animateTransform></circle></svg>
 </div>
@@ -28,7 +28,7 @@
                     {
                         "comparisonItem":[
                         {
-                            "keyword":"{{val}}",
+                            "keyword":"{{value}}",
                             "geo":"",
                             "time":"today 12-m"
                         }
@@ -36,7 +36,7 @@
                         "category":0,"property":""
                     },
                     {
-                        "exploreQuery":"q={{val}}&date=today 12-m,today 12-m","guestPath":"https://trends.google.com:443/trends/embed/"
+                        "exploreQuery":"q={{value}}&date=today 12-m,today 12-m","guestPath":"https://trends.google.com:443/trends/embed/"
                     });
             </script>
             {% for ip in allnews %}
@@ -64,20 +64,24 @@
     {% block jquery %}
     var endpoint1 = '/api/chart/TimeSeriesDailyAdjusted/'
     var defaultData = [];
-    var defaultDataMACD = [];
+    var defaultDataEMA1 = [];
+    var defaultDataEMA2 = [];
     var news = []; 
+    var sentiment;
 
         $.ajax({
                     method: "GET",
                     url: endpoint1,
                 success: function(alldata){
                     defaultData = alldata.defaultDaily
-                    defaultDataMACD = alldata.defaultMACD              
+                    defaultDataEMA1 = alldata.defaultEMA1                
+                    defaultDataEMA2 = alldata.defaultEMA2   
+                    sentiment = alldata.sentiment             
                     setChart1()
                     setChart2()
-                    setChart3()
-                    setChartMACD()
                     setGauge()
+                    //setChart3()
+                    //setChartMACD()
                     $("#progress").hide()
                 },
                 error: function(error_data){
@@ -88,7 +92,7 @@
 
             function setGauge(){
                 // Enter a speed between 0 and 180
-                var level = 75;
+                var level = (sentiment)*9;
 
                 // Trig to calc meter point
                 var degrees = 180 - level,
@@ -189,7 +193,8 @@
                 {
                     x: defaultData.date,
                     y: defaultData.close,
-                    type: 'scatter'
+                    type: 'scatter',
+                    name:'line'
                 }
                 ];
 
@@ -208,10 +213,49 @@
             open:  defaultData.open,
             type: 'candlestick', 
             xaxis: 'x', 
-            yaxis: 'y'
+            yaxis: 'y',
+            name:'candlestick'
             };
+            var trace2 = {
+                x: defaultDataEMA1.date,
+                y: defaultDataEMA1.EMA,
+                line:{width: 1},
+                marker:{color: '#ED0707'},
+                mode:'lines',
+                name:'MA-9',
+                type:'scatter',
+                yaxis:'y'
 
-            var data = [trace1];
+            };
+            var trace3 = {
+                x: defaultDataEMA2.date,
+                y: defaultDataEMA2.EMA,
+                line:{width: 1},
+                marker:{color: '#000000'},
+                mode:'lines',
+                name:'MA-26',
+                type:'scatter',
+                yaxis:'y'
+
+            };
+            var trace4 = {
+                x:defaultData.date,
+                marker:{color: '#7F7F7F'},
+                name:'Volume',
+                type:'bar',
+                yaxis:'y',
+                volume:defaultData.volume
+            };
+            var trace5 = {
+                x: defaultData.date,
+                y: defaultData.close,
+                type: 'scatter',
+                name:'line'
+            }
+
+
+
+            var data = [trace1,trace2,trace3,trace5];
 
             var layout = {
             dragmode: 'zoom', 
@@ -223,9 +267,9 @@
             }, 
             showlegend: false, 
             xaxis: {
-                autorange: true, 
+                // autorange: false, 
                 domain: [0, 1], 
-                range: ['1995-01-03 12:00', '2017-02-15 12:00'],
+                range: ['2016-01-03', '2017-02-15'],
                 rangeselector: {buttons: [
                 {
                     count: 1,
@@ -241,20 +285,23 @@
                 },
                 {step: 'all'}
                 ]},
+                rangeslider:{range:['2016-01-03','2017-05-04']},
         
                 title: 'Date', 
                 type: 'date'
             }, 
             yaxis: {
-                autorange: true, 
+                //autorange: false, 
                 domain: [0, 1], 
-                range: [114.609999778, 137.410004222], 
-                type: 'linear'
+                range: [1000, 1800], 
+                type: 'linear',
+                rangeslider:{range:['1000','1800']}
             }
             };
 
             Plotly.plot('plotly-div', data, layout);    
         }
+
 
         function setChart3(){
         var trace1 = {
