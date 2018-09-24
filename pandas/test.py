@@ -7,19 +7,24 @@ import datetime
 import numpy as np
 import random
 import collections
+import time
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout, LSTM, CuDNNLSTM, BatchNormalization
+from tensorflow.keras.callbacks import TensorBoard
+from tensorflow.keras.callbacks import ModelCheckpoint
 
-style.use('fivethirtyeight')
-data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=NSE:TCS&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
-
+data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=NSE:TCS&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
+        
 data=data.json()
 data=data['Time Series (Daily)']
-df=pd.DataFrame(columns=['date','close','volume'])
+df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
 for d,p in data.items():
-    date=datetime.datetime.strptime(d,'%Y-%m-%d')
-    data_row=[date,float(p['4. close']),float(p['5. volume'])]
-    df.loc[-1,:]=data_row
-    df.index=df.index+1
-# data, df_new2 = df.values[:1000, :], df.values[1000:, :] if len(df) > 1000 else df, None
+    if float(p['3. low'])!=0:
+        date=datetime.datetime.strptime(d,'%Y-%m-%d')
+        data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['6. volume'])]
+        df.loc[-1,:]=data_row
+        df.index=df.index+1
 data=df.sort_values('date')
 data.set_index("date", inplace=True)
 # print(data)
@@ -27,7 +32,8 @@ data.set_index("date", inplace=True)
 # data['1min']=np.round(data['close'].rolling(window=1).mean(),2)
 # data[['1000min','close']].plot()
 SEQ_LEN = 100  # how long of a preceeding sequence to collect for RNN
-FUTURE_PERIOD_PREDICT = 3  # how far into the future are we trying to predict?
+FUTURE_PERIOD_PREDICT = 1  # how far into the future are we trying to predict?
+
 
 def classify(current, future):
     if float(future) > float(current):
@@ -36,16 +42,15 @@ def classify(current, future):
         return 0
 
 def preprocess_df(df):
-    pd.DataFrame(df).fillna(0)
-    # print(np.isfinite(data.all()))
+
     for col in df.columns:  # go through all of the columns
-        if col not in ["target"]:  # normalize all ... except for the target itself!
-            # df[col] = df[col].pct_change()  # pct change "normalizes" the different currencies (each crypto coin has vastly diff values, we're really more interested in the other coin's movements)
-            # print(np.isfinite(data.all()))
+        if col != "target":  # normalize all ... except for the target itself!
+            df[col] = df[col].pct_change()  # pct change "normalizes" the different currencies (each crypto coin has vastly diff values, we're really more interested in the other coin's movements)
             df.dropna(inplace=True)  # remove the nas created by pct_change
-            # print(np.isfinite(data.all()))
             df[col] = preprocessing.scale(df[col].values)  # scale between 0 and 1.
-    df.dropna(inplace=True)  # cleanup again... jic. Those nasty NaNs love to creep in.
+
+    df.dropna(inplace=True)  # cleanup again... jic.
+
     # print(df)
     sequential_data = []  # this is a list that will CONTAIN the sequences
     prev_days = collections.deque(maxlen=SEQ_LEN)  # These will be our actual sequences. They are made with deque, which keeps the maximum length by popping out older values as new ones come in
@@ -57,8 +62,8 @@ def preprocess_df(df):
             
 
     random.shuffle(sequential_data)  # shuffle for good measure.
-    print(sequential_data)
-    print(len(sequential_data))
+    # print(sequential_data)
+    # print(len(sequential_data))
     buys = []  # list that will store our buy sequences and targets
     sells = []  # list that will store our sell sequences and targets
 
@@ -110,13 +115,18 @@ data = data[(data.index < last_5pct)]  # now the data is all the data up to the 
 #print(validation_data)
 # print(len(validation_data))
   
-preprocess_df(validation_data)
-# train_x, train_y = preprocess_df(data)
-# validation_x, validation_y = preprocess_df(validation_data)
+# print(data.head())
 
-# print(f"train data: {len(train_x)} validation: {len(validation_x)}")
-# print(f"Dont buys: {train_y.count(0)}, buys: {train_y.count(1)}")
-# print(f"VALIDATION Dont buys: {validation_y.count(0)}, buys: {validation_y.count(1)}")
+# preprocess_df(validation_data)
+train_x, train_y = preprocess_df(data)
+validation_x, validation_y = preprocess_df(validation_data)
+
+print(f"train data: {len(train_x)} validation: {len(validation_x)}")
+print(f"Dont buys: {train_y.count(0)}, buys: {train_y.count(1)}")
+print(f"VALIDATION Dont buys: {validation_y.count(0)}, buys: {validation_y.count(1)}")
+
+
+print(train_x.shape[1:])
 
 # print(data.head())
 # print(data.tail())
@@ -125,33 +135,26 @@ preprocess_df(validation_data)
 
 # print(train_x.ndim)
 
-def arraycahnge(x):
-    for i in range (len(x)):
-        y=len(x[i])
-        x[i]=x[i].reshape(y,1)
-        x[i]=[x[i]]
-    # x=x.reshape(len(x),200,1)
-    print(x)
-    return x
+# def arraycahnge(x):
+#     for i in range (len(x)):
+#         y=len(x[i])
+#         x[i]=x[i].reshape(y,1)
+#         x[i]=[x[i]]
+#     # x=x.reshape(len(x),200,1)
+#     print(x)
+#     return x
 
 # arraycahnge(train_x)
 # train_x1=train_x[3073].reshape(200,1)
 # print(train_x[3073])
 # print(train_x1.ndim)
-# import time
 
 # EPOCHS = 10  # how many passes through our data
 # BATCH_SIZE = 64  # how many batches? Try smaller batch if you're getting OOM (out of memory) errors.
 # NAME = f"{SEQ_LEN}-SEQ-{FUTURE_PERIOD_PREDICT}-PRED-{int(time.time())}"  # a unique name for the model
 
-# import tensorflow as tf
-# from tensorflow.keras.models import Sequential
-# from tensorflow.keras.layers import Dense, Dropout, LSTM, BatchNormalization
-# from tensorflow.keras.callbacks import TensorBoard
-# from tensorflow.keras.callbacks import ModelCheckpoint
-
 # model = Sequential()
-# model.add(LSTM(128, input_shape=(train_x1.shape[0],2), return_sequences=True))
+# model.add(LSTM(128, input_shape=(train_x.shape[:1]), return_sequences=True))
 # model.add(Dropout(0.2))
 # model.add(BatchNormalization())  
 # #normalizes activation outputs, same reason you want to normalize your input data.

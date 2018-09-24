@@ -4,7 +4,7 @@ import random
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, LSTM, LSTM, BatchNormalization
+from tensorflow.keras.layers import Dense, Dropout, LSTM, CuDNNLSTM, BatchNormalization
 from tensorflow.keras.callbacks import TensorBoard
 from tensorflow.keras.callbacks import ModelCheckpoint, ModelCheckpoint
 import time
@@ -24,27 +24,6 @@ def classify(current, future):
     else:  # otherwise... it's a 0!
         return 0
 
-
-def preprocess_df(df):
-    df = df.drop("future", 1)  # don't need this anymore.
-
-    for col in df.columns:  # go through all of the columns
-        if col != "target":  # normalize all ... except for the target itself!
-            df[col] = df[col].pct_change()  # pct change "normalizes" the different currencies (each crypto coin has vastly diff values, we're really more interested in the other coin's movements)
-            df.dropna(inplace=True)  # remove the nas created by pct_change
-            df[col] = preprocessing.scale(df[col].values)  # scale between 0 and 1.
-
-    df.dropna(inplace=True)  # cleanup again... jic. Those nasty NaNs love to creep in.
-
-    sequential_data = []  # this is a list that will CONTAIN the sequences
-    prev_days = deque(maxlen=SEQ_LEN)  # These will be our actual sequences. They are made with deque, which keeps the maximum length by popping out older values as new ones come in
-
-    for i in df.values:  # iterate over the values
-        prev_days.append([n for n in i[:-1]])  # store all but the target
-        if len(prev_days) == SEQ_LEN:  # make sure we have 60 sequences!
-            sequential_data.append([np.array(prev_days), i[-1]])  # append those bad boys!
-
-    random.shuffle(sequential_data)  # shuffle for good measure.
 
 df = pd.read_csv("crypto_data/LTC-USD.csv", names=['time', 'low', 'high', 'open', 'close', 'volume'])
 
@@ -138,6 +117,8 @@ last_5pct = sorted(main_df.index.values)[-int(0.05*len(times))]
 validation_main_df = main_df[(main_df.index >= last_5pct)]
 main_df = main_df[(main_df.index < last_5pct)]
 
+# print(main_df.head())
+
 train_x, train_y = preprocess_df(main_df)
 validation_x, validation_y = preprocess_df(validation_main_df)
 
@@ -145,16 +126,18 @@ print(f"train data: {len(train_x)} validation: {len(validation_x)}")
 print(f"Dont buys: {train_y.count(0)}, buys: {train_y.count(1)}")
 print(f"VALIDATION Dont buys: {validation_y.count(0)}, buys: {validation_y.count(1)}")
 
-model = Sequential()
-model.add(LSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
-model.add(Dropout(0.2))
-model.add(BatchNormalization())
+# print(train_x.shape[1:])
 
-model.add(LSTM(128, return_sequences=True))
+model = Sequential()
+model.add(CuDNNLSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
+model.add(Dropout(0.2))
+model.add(BatchNormalization())  #normalizes activation outputs, same reason you want to normalize your input data.
+
+model.add(CuDNNLSTM(128, return_sequences=True))
 model.add(Dropout(0.1))
 model.add(BatchNormalization())
 
-model.add(LSTM(128))
+model.add(CuDNNLSTM(128))
 model.add(Dropout(0.2))
 model.add(BatchNormalization())
 
