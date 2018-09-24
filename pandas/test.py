@@ -14,6 +14,13 @@ from tensorflow.keras.layers import Dense, Dropout, LSTM, CuDNNLSTM, BatchNormal
 from tensorflow.keras.callbacks import TensorBoard
 from tensorflow.keras.callbacks import ModelCheckpoint
 
+SEQ_LEN = 60  # how long of a preceeding sequence to collect for RNN
+FUTURE_PERIOD_PREDICT = 3  # how far into the future are we trying to predict?
+EPOCHS = 10  # how many passes through our data
+BATCH_SIZE = 64  # how many batches? Try smaller batch if you're getting OOM (out of memory) errors.
+NAME = f"{SEQ_LEN}-SEQ-{FUTURE_PERIOD_PREDICT}-PRED-{int(time.time())}"
+
+
 data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=NSE:TCS&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
         
 data=data.json()
@@ -31,8 +38,6 @@ data.set_index("date", inplace=True)
 # data['date']=data['date'].astype(datetime.datetime)
 # data['1min']=np.round(data['close'].rolling(window=1).mean(),2)
 # data[['1000min','close']].plot()
-SEQ_LEN = 100  # how long of a preceeding sequence to collect for RNN
-FUTURE_PERIOD_PREDICT = 1  # how far into the future are we trying to predict?
 
 
 def classify(current, future):
@@ -149,9 +154,6 @@ print(train_x.shape[1:])
 # print(train_x[3073])
 # print(train_x1.ndim)
 
-# EPOCHS = 10  # how many passes through our data
-# BATCH_SIZE = 64  # how many batches? Try smaller batch if you're getting OOM (out of memory) errors.
-# NAME = f"{SEQ_LEN}-SEQ-{FUTURE_PERIOD_PREDICT}-PRED-{int(time.time())}"  # a unique name for the model
 
 # model = Sequential()
 # model.add(LSTM(128, input_shape=(train_x.shape[:1]), return_sequences=True))
@@ -201,3 +203,4 @@ print(train_x.shape[1:])
 # print('Test accuracy:', score[1])
 # # Save model
 # model.save("models/{}".format(NAME))
+a
