@@ -158,7 +158,7 @@ model.compile(
 
 tensorboard = TensorBoard(log_dir="logs/{}".format(NAME))
 
-filepath = "rnn-final-{epoch:02d}-{val_acc:.3f}"  # unique file name that will include the epoch and the validation acc for that epoch
+filepath = "RNN_Final-{epoch:02d}-{val_acc:.3f}"  # unique file name that will include the epoch and the validation acc for that epoch
 checkpoint = ModelCheckpoint("models/{}.model".format(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')) # saves only the best ones
 
 # Train model
@@ -167,7 +167,7 @@ history = model.fit(
     batch_size=BATCH_SIZE,
     epochs=EPOCHS,
     validation_data=(validation_x, validation_y),
-    callbacks=[tensorboard],
+    callbacks=[tensorboard, checkpoint],
 )
 
 # Score model
