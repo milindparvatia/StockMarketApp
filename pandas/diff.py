@@ -25,9 +25,6 @@ def classify(current, future):
         return 0
 
 
-df = pd.read_csv("crypto_data/LTC-USD.csv", names=['time', 'low', 'high', 'open', 'close', 'volume'])
-
-
 def preprocess_df(df):
     df = df.drop("future", 1)  # don't need this anymore.
 
@@ -119,60 +116,60 @@ main_df = main_df[(main_df.index < last_5pct)]
 
 # print(main_df.head())
 
-train_x, train_y = preprocess_df(main_df)
+# train_x, train_y = preprocess_df(main_df)
 validation_x, validation_y = preprocess_df(validation_main_df)
 
-print(f"train data: {len(train_x)} validation: {len(validation_x)}")
-print(f"Dont buys: {train_y.count(0)}, buys: {train_y.count(1)}")
-print(f"VALIDATION Dont buys: {validation_y.count(0)}, buys: {validation_y.count(1)}")
+# print(f"train data: {len(train_x)} validation: {len(validation_x)}")
+# print(f"Dont buys: {train_y.count(0)}, buys: {train_y.count(1)}")
+# print(f"VALIDATION Dont buys: {validation_y.count(0)}, buys: {validation_y.count(1)}")
 
-# print(train_x.shape[1:])
+print(validation_x)
 
-model = Sequential()
-model.add(CuDNNLSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
-model.add(Dropout(0.2))
-model.add(BatchNormalization())  #normalizes activation outputs, same reason you want to normalize your input data.
+# model = Sequential()
+# model.add(CuDNNLSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
+# model.add(Dropout(0.2))
+# model.add(BatchNormalization())  #normalizes activation outputs, same reason you want to normalize your input data.
 
-model.add(CuDNNLSTM(128, return_sequences=True))
-model.add(Dropout(0.1))
-model.add(BatchNormalization())
+# model.add(CuDNNLSTM(128, return_sequences=True))
+# model.add(Dropout(0.1))
+# model.add(BatchNormalization())
 
-model.add(CuDNNLSTM(128))
-model.add(Dropout(0.2))
-model.add(BatchNormalization())
+# model.add(CuDNNLSTM(128))
+# model.add(Dropout(0.2))
+# model.add(BatchNormalization())
 
-model.add(Dense(32, activation='relu'))
-model.add(Dropout(0.2))
+# model.add(Dense(32, activation='relu'))
+# model.add(Dropout(0.2))
 
-model.add(Dense(2, activation='softmax'))
+# model.add(Dense(2, activation='softmax'))
 
 
-opt = tf.keras.optimizers.Adam(lr=0.001, decay=1e-6)
+# opt = tf.keras.optimizers.Adam(lr=0.001, decay=1e-6)
 
-# Compile model
-model.compile(
-    loss='sparse_categorical_crossentropy',
-    optimizer=opt,
-    metrics=['accuracy']
-)
+# # Compile model
+# model.compile(
+#     loss='sparse_categorical_crossentropy',
+#     optimizer=opt,
+#     metrics=['accuracy']
+# )
 
-tensorboard = TensorBoard(log_dir="logs/{}".format(NAME))
+# tensorboard = TensorBoard(log_dir="logs/{}".format(NAME))
 
-filepath = "RNN_Final-{epoch:02d}-{val_acc:.3f}"  # unique file name that will include the epoch and the validation acc for that epoch
-checkpoint = ModelCheckpoint("models/{}.model".format(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')) # saves only the best ones
+# filepath = "RNN_Final-{epoch:02d}-{val_acc:.3f}"  # unique file name that will include the epoch and the validation acc for that epoch
+# checkpoint = ModelCheckpoint("models/{}.model".format(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')) # saves only the best ones
 
-# Train model
-history = model.fit(
-    train_x, train_y,
-    batch_size=BATCH_SIZE,
-    epochs=EPOCHS,
-    validation_data=(validation_x, validation_y),
-    callbacks=[tensorboard, checkpoint],
-)
+# # Train model
+# history = model.fit(
+#     train_x, train_y,
+#     batch_size=BATCH_SIZE,
+#     epochs=EPOCHS,
+#     validation_data=(validation_x, validation_y),
+#     callbacks=[tensorboard, checkpoint],
+# )
 
-# Score model
-score = model.evaluate(validation_x, validation_y, verbose=0)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
-# Save model
-model.save("models/{}".format(NAME))
+# # Score model
+# score = model.evaluate(validation_x, validation_y, verbose=0)
+# print('Test loss:', score[0])
+# print('Test accuracy:', score[1])
+# # Save model
+# model.save("models/{}".format(NAME))

@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
 from matplotlib import style
 from sklearn import preprocessing
+from sklearn.preprocessing import Imputer
 import requests
 import pandas as pd
 import datetime
 import numpy as np
 import random
-import collections
+from collections import deque
 import time
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -15,14 +16,13 @@ from tensorflow.keras.callbacks import TensorBoard
 from tensorflow.keras.callbacks import ModelCheckpoint
 
 SEQ_LEN = 60  # how long of a preceeding sequence to collect for RNN
-FUTURE_PERIOD_PREDICT = 3  # how far into the future are we trying to predict?
+FUTURE_PERIOD_PREDICT = 1  # how far into the future are we trying to predict?
 EPOCHS = 10  # how many passes through our data
 BATCH_SIZE = 64  # how many batches? Try smaller batch if you're getting OOM (out of memory) errors.
 NAME = f"{SEQ_LEN}-SEQ-{FUTURE_PERIOD_PREDICT}-PRED-{int(time.time())}"
 
-
-data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=NSE:TCS&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
-        
+data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=AAPL&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
+ 
 data=data.json()
 data=data['Time Series (Daily)']
 df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
@@ -32,9 +32,11 @@ for d,p in data.items():
         data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['6. volume'])]
         df.loc[-1,:]=data_row
         df.index=df.index+1
-data=df.sort_values('date')
-data.set_index("date", inplace=True)
-# print(data)
+main_df=df.sort_values('date')
+main_df['date'] = main_df['date'].dt.strftime('%Y%m%d')
+main_df.set_index("date", inplace=True)
+# print(main_df.head())
+
 # data['date']=data['date'].astype(datetime.datetime)
 # data['1min']=np.round(data['close'].rolling(window=1).mean(),2)
 # data[['1000min','close']].plot()
@@ -46,29 +48,31 @@ def classify(current, future):
     else:
         return 0
 
-def preprocess_df(df):
 
-    for col in df.columns:  # go through all of the columns
-        if col not in ["target"]:  # normalize all ... except for the target itself!
-            # df[col] = df[col].pct_change()  # pct change "normalizes" the different currencies (each crypto coin has vastly diff values, we're really more interested in the other coin's movements)
-            # print(np.isfinite(data.all()))
-            df.dropna(inplace=True)  # remove the nas created by pct_change
-            # print(np.isfinite(data.all()))
-            df[col] = preprocessing.scale(df[col].values)  # scale between 0 and 1.
-    df.dropna(inplace=True)  # cleanup again... jic. Those nasty NaNs love to creep in.
-    # print(df)
-    sequential_data = []  # this is a list that will CONTAIN the sequences
-    prev_days = collections.deque(maxlen=SEQ_LEN)  # These will be our actual sequences. They are made with deque, which keeps the maximum length by popping out older values as new ones come in
+def preprocess_df(df):
+    df = df.drop("future", 1)  # don't need this anymore.
+
+    # min_max_scaler = preprocessing.MinMaxScaler()
+    # df  = min_max_scaler.fit_transform(df)
+    # df = pd.DataFrame(df)
     
+    for col in df.columns:  # go through all of the columns
+        if col != "target":  # normalize all ... except for the target itself!
+            df[col] = df[col].pct_change()  # pct change "normalizes" the different currencies (each crypto coin has vastly diff values, we're really more interested in the other coin's movements)
+            df.dropna(inplace=True)  # remove the nas created by pct_change          # scale between 0 and 1.
+    
+    # print(df)
+
+    sequential_data = []  # this is a list that will CONTAIN the sequences
+    prev_days = deque(maxlen=SEQ_LEN)  # These will be our actual sequences. They are made with deque, which keeps the maximum length by popping out older values as new ones come in
+
     for i in df.values:  # iterate over the values
         prev_days.append([n for n in i[:-1]])  # store all but the target
-        # if len(prev_days) == SEQ_LEN:# print(len(prev_days))
-        sequential_data.append([np.array(prev_days), i[-1]])  # append those bad boys!
-            
+        if len(prev_days) == SEQ_LEN:  # make sure we have 60 sequences!
+            sequential_data.append([np.array(prev_days), i[-1]])  # append those bad boys!
 
     random.shuffle(sequential_data)  # shuffle for good measure.
-    # print(sequential_data)
-    # print(len(sequential_data))
+
     buys = []  # list that will store our buy sequences and targets
     sells = []  # list that will store our sell sequences and targets
 
@@ -86,12 +90,9 @@ def preprocess_df(df):
     buys = buys[:lower]  # make sure both lists are only up to the shortest length.
     sells = sells[:lower]  # make sure both lists are only up to the shortest length.
 
-    # print(len(sells))
-    # print(len(buys))
-
     sequential_data = buys+sells  # add them together
     random.shuffle(sequential_data)  # another shuffle, so the model doesn't get confused with all 1 class then the other.
-    # print(len(sequential_data))
+
     X = []
     y = []
 
@@ -99,108 +100,79 @@ def preprocess_df(df):
         X.append(seq)  # X is the sequences
         y.append(target)  # y is the targets/labels (buys vs sell/notbuy)
 
-    return np.array(X), y  # return X and y...and make X a numpy array! ..import numpy as np
+    return np.array(X), y  # return X and y...and make X a numpy array!
 
-data.fillna(method="ffill", inplace=True)  # if there are gaps in data, use previously known values
-data.dropna(inplace=True)
+main_df.fillna(method="ffill", inplace=True)  # if there are gaps in data, use previously known values
+main_df.dropna(inplace=True)
 
-arr = data['close'].shift(-FUTURE_PERIOD_PREDICT)
-data['target'] = list(map(classify, data['close'], arr))
-# print(len(data))
-# print(data.head())
+main_df['future'] = main_df[f'close'].shift(-FUTURE_PERIOD_PREDICT)
+main_df['target'] = list(map(classify, main_df[f'close'], main_df['future']))
 
+main_df.dropna(inplace=True)
 
-times = sorted(data.index.values)
-last_5pct = times[-int(0.05*len(times))]
+## here, split away some slice of the future data from the main main_df.
+times = sorted(main_df.index.values)
+last_5pct = sorted(main_df.index.values)[-int(0.05*len(times))]
 
-# print(last_5pct)
+validation_main_df  = main_df[(main_df.index >= last_5pct)]
+main_df = main_df[(main_df.index < last_5pct)]
 
-validation_data = data[(data.index >= last_5pct)]  # make the validation data where the index is in the last 5%
-data = data[(data.index < last_5pct)]  # now the data is all the data up to the last 5%
-#print(validation_data)
-# print(len(validation_data))
-  
-# print(data.head())
+# print(main_df)
 
-# preprocess_df(validation_data)
-train_x, train_y = preprocess_df(data)
-validation_x, validation_y = preprocess_df(validation_data)
+train_x, train_y = preprocess_df(main_df)
+validation_x, validation_y = preprocess_df(validation_main_df)
 
 print(f"train data: {len(train_x)} validation: {len(validation_x)}")
 print(f"Dont buys: {train_y.count(0)}, buys: {train_y.count(1)}")
 print(f"VALIDATION Dont buys: {validation_y.count(0)}, buys: {validation_y.count(1)}")
 
+# print(validation_x)
 
-print(train_x.shape[1:])
+model = Sequential()
+model.add(CuDNNLSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
+#model.add(Dropout(0.2))
+model.add(BatchNormalization())  #normalizes activation outputs, same reason you want to normalize your input data.
 
-# print(data.head())
-# print(data.tail())
+model.add(CuDNNLSTM(128, return_sequences=True))
+model.add(Dropout(0.1))
+model.add(BatchNormalization())
 
-# print(len(data))
+model.add(CuDNNLSTM(220))
+model.add(Dropout(0.2))
+model.add(BatchNormalization())
 
-# print(train_x.ndim)
+model.add(Dense(32, activation='relu'))
+model.add(Dropout(0.2))
 
-# def arraycahnge(x):
-#     for i in range (len(x)):
-#         y=len(x[i])
-#         x[i]=x[i].reshape(y,1)
-#         x[i]=[x[i]]
-#     # x=x.reshape(len(x),200,1)
-#     print(x)
-#     return x
-
-# arraycahnge(train_x)
-# train_x1=train_x[3073].reshape(200,1)
-# print(train_x[3073])
-# print(train_x1.ndim)
+model.add(Dense(2, activation='softmax'))
 
 
-# model = Sequential()
-# model.add(LSTM(128, input_shape=(train_x.shape[:1]), return_sequences=True))
-# model.add(Dropout(0.2))
-# model.add(BatchNormalization())  
-# #normalizes activation outputs, same reason you want to normalize your input data.
+opt = tf.keras.optimizers.Adam(lr=0.001, decay=1e-6)
 
-# model.add(LSTM(128, return_sequences=True))
-# model.add(Dropout(0.1))
-# model.add(BatchNormalization())
+# Compile model
+model.compile(
+    loss='sparse_categorical_crossentropy',
+    optimizer=opt,
+    metrics=['accuracy']
+)
 
-# model.add(LSTM(128))
-# model.add(Dropout(0.2))
-# model.add(BatchNormalization())
+tensorboard = TensorBoard(log_dir="logs/{}".format(NAME))
 
-# model.add(Dense(32, activation='relu'))
-# model.add(Dropout(0.2))
+filepath = "RNN_Final-{epoch:02d}-{val_acc:.3f}"  # unique file name that will include the epoch and the validation acc for that epoch
+checkpoint = ModelCheckpoint("models/{}.model".format(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')) # saves only the best ones
 
-# model.add(Dense(2, activation='softmax'))
+# Train model
+history = model.fit(
+    train_x, train_y,
+    batch_size=BATCH_SIZE,
+    epochs=EPOCHS,
+    validation_data=(validation_x, validation_y),
+    callbacks=[tensorboard, checkpoint],
+)
 
-# opt = tf.keras.optimizers.Adam(lr=0.001, decay=1e-6)
-
-# # Compile model
-# model.compile(
-#     loss='sparse_categorical_crossentropy',
-#     optimizer=opt,
-#     metrics=['accuracy']
-# )
-
-# tensorboard = TensorBoard(log_dir="logs/{}".format(NAME))
-
-# filepath = "RNN_Final-{epoch:02d}-{val_acc:.3f}"  # unique file name that will include the epoch and the validation acc for that epoch
-# checkpoint = ModelCheckpoint("models/{}.model".format(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')) # saves only the best ones
-
-# # Train model
-# history = model.fit(
-#     train_x, train_y,
-#     batch_size=BATCH_SIZE,
-#     epochs=EPOCHS,
-#     validation_data=(validation_x, validation_y),
-#     callbacks=[tensorboard, checkpoint],
-# )
-
-# # Score model
-# score = model.evaluate(validation_x, validation_y, verbose=0)
-# print('Test loss:', score[0])
-# print('Test accuracy:', score[1])
-# # Save model
-# model.save("models/{}".format(NAME))
-a
+# Score model
+score = model.evaluate(validation_x, validation_y, verbose=0)
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
+# Save model
+model.save("models/{}".format(NAME))
