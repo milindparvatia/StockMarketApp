@@ -1,2 +1,1 @@
 stopwords
-word_tokenize
