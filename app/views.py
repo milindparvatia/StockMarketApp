@@ -5,6 +5,12 @@ from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import Ridge
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
 import requests
 import pandas as pd
 import urllib3, json
@@ -50,36 +56,6 @@ def get_name(request):
         form = NameForm()
         return render(request, 'app/name.html', {'form': form})
 
-# def get_name(request):
-#     # if this is a POST request we need to process the form data
-#     if request.method == 'POST':
-#         # create a form instance and populate it with data from the request:
-#         form = NameForm(request.POST)
-#         # check whether it's valid:
-#         if form.is_valid():
-#             # process the data in form.cleaned_data as required
-#             valArray = form.cleaned_data['search']
-#             Array = valArray.split(":")
-#             value = Array[1]
-#             val = form.cleaned_data['search']
-#             with open('searchVal.txt','w+') as f:
-#                 #convert to string:
-#                 f.seek(0)
-#                 f.write(val)
-#                 f.truncate()
-#                 f.close()
-#             # redirect to a new URL:
-#             url = ('https://newsapi.org/v2/everything?q="'+value+'"&apiKey=4df8d4c46e5f41bca7e6e1331b63ad7d')
-#             response = requests.get(url)
-#             geodata = response.json()
-            
-#             return render(request, 'app/search.html', {'allnews': geodata['articles'],'val': val})
-            
-#     # if a GET (or any other method) we'll create a blank form
-#     else:
-#         form = NameForm()
-#         return render(request, 'app/name.html', {'form': form})
-
 class TimeSeriesDailyAdjusted(APIView):
     authentication_classes = []
     permission_classes = []
@@ -90,7 +66,7 @@ class TimeSeriesDailyAdjusted(APIView):
         # dataval = unquote(dataval)
         search_val = open('searchVal.txt','r').read()
         
-        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
+        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=NSE:TCS&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Time Series (Daily)']
         df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
@@ -102,6 +78,66 @@ class TimeSeriesDailyAdjusted(APIView):
                 df.index=df.index+1
         dataDaily=df.sort_values('date')
 
+        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=NSE:TCS&outputsize=compact&apikey=6G6EDTRGV2N1F9SP')
+        data=data.json()
+        data=data['Time Series (Daily)']
+        df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
+        for d,p in data.items():
+            if float(p['3. low'])!=0:
+                date=datetime.datetime.strptime(d,'%Y-%m-%d')
+                data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['6. volume'])]
+                df.loc[-1,:]=data_row
+                df.index=df.index+1
+        main_df=df.sort_values('date')
+        main_df['date'] = main_df['date'].dt.strftime('%Y%m%d')
+        main_df.set_index("date", inplace=True)
+
+        x,y=[],[]
+        columns=['open','high','low','close','volume']
+
+        def prediction(x1,y):
+            scaler=MinMaxScaler()
+            scaler.fit(x1)
+            tt=scaler.transform(x1)
+            x=pd.DataFrame(data=tt)
+            
+            for i in range(len(y)-2):
+                    y[i]=y[i+1]
+            
+            x_train=x[0:80]
+            x_test=x[81:97]
+            y_train=y[0:80]
+            y_test=y[81:97]
+            sc = StandardScaler()
+            
+            x_train = sc.fit_transform(x_train)
+            x_test = sc.fit_transform(x_test)
+            
+            model = make_pipeline(PolynomialFeatures(3), Ridge())
+            model.fit(x_train, y_train)
+            y_plot = model.predict(x_test)
+                
+            return y_plot,y_test
+            
+        x1=main_df.iloc[:,]
+
+        yplotDF = pd.DataFrame()
+        ytestDF = pd.DataFrame()
+            
+        for i in range(len(columns)):
+            y=main_df.iloc[:,i]   
+            y=y.astype('int')
+            y_pred,y_orig = prediction(x1,y)
+            yplotDF[i] = pd.Series(y_pred)
+            ytestDF[i] = pd.Series(y_orig)
+        
+        ytestDF['date'] = pd.to_datetime(ytestDF.index, format='%Y%m%d')
+        yplotDF['date'] = pd.to_datetime(ytestDF.index, format='%Y%m%d')
+        
+
+        yplotDF.columns = ['open','high','low','close','volume','date']
+        ytestDF.columns = ['open','high','low','close','volume','date']
+        
         data=requests.get('https://www.alphavantage.co/query?function=EMA&symbol='+search_val+'&interval=weekly&time_period=9&series_type=open&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Technical Analysis: EMA']
@@ -155,41 +191,27 @@ class TimeSeriesDailyAdjusted(APIView):
 
         for i in range(len(total)):
             total[i] = total[i].lower()
-
-        
         f.close()
 
+        
         sentiment=str(sentiment)
         str(neg)
         str(pos)
 
+        predict = yplotDF
+        original = ytestDF
         defaultEMA1 = dataEMA1
         defaultEMA2 = dataEMA2
         defaultDaily = dataDaily
         alldata = {
             "defaultDaily": defaultDaily,
-            "sentiment": sentiment,
             "defaultEMA2":defaultEMA2,
             "defaultEMA1":defaultEMA1,
+            "predict":predict,
+            "original":original,
+            "sentiment": sentiment,
         }
         return Response(alldata)
-
-class Tweeter(APIView):
-    authentication_classes = []
-    permission_classes = []
-        
-#     def get(self, request, format=None):
-#         search_val = open('searchVal.txt','r').read()
-#         result_array = np.array([])
-#         for tweet in query_tweets("Trump OR Clinton", 10)[:10]:
-#             result=tweet.user.encode('utf-8')
-#             return result
-#         tdata  = json.loads(result)
-#         default_items = tdata
-#         alldata = {
-#                 "default": default_items,
-#         }
-#         return Response(alldata)
 
 
 def search(request):

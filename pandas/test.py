@@ -15,7 +15,7 @@ from tensorflow.keras.layers import Dense, Dropout, LSTM, CuDNNLSTM, BatchNormal
 from tensorflow.keras.callbacks import TensorBoard
 from tensorflow.keras.callbacks import ModelCheckpoint
 
-SEQ_LEN = 60  # how long of a preceeding sequence to collect for RNN
+SEQ_LEN = 2  # how long of a preceeding sequence to collect for RNN
 FUTURE_PERIOD_PREDICT = 1  # how far into the future are we trying to predict?
 EPOCHS = 10  # how many passes through our data
 BATCH_SIZE = 64  # how many batches? Try smaller batch if you're getting OOM (out of memory) errors.
@@ -25,11 +25,11 @@ data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_
  
 data=data.json()
 data=data['Time Series (Daily)']
-df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
+df=pd.DataFrame(columns=['date','close','volume'])
 for d,p in data.items():
     if float(p['3. low'])!=0:
         date=datetime.datetime.strptime(d,'%Y-%m-%d')
-        data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['6. volume'])]
+        data_row=[date,float(p['4. close']),int(p['6. volume'])]
         df.loc[-1,:]=data_row
         df.index=df.index+1
 main_df=df.sort_values('date')
@@ -51,17 +51,8 @@ def classify(current, future):
 
 def preprocess_df(df):
     df = df.drop("future", 1)  # don't need this anymore.
-
-    # min_max_scaler = preprocessing.MinMaxScaler()
-    # df  = min_max_scaler.fit_transform(df)
-    # df = pd.DataFrame(df)
     
-    for col in df.columns:  # go through all of the columns
-        if col != "target":  # normalize all ... except for the target itself!
-            df[col] = df[col].pct_change()  # pct change "normalizes" the different currencies (each crypto coin has vastly diff values, we're really more interested in the other coin's movements)
-            df.dropna(inplace=True)  # remove the nas created by pct_change          # scale between 0 and 1.
-    
-    # print(df)
+    print(df)
 
     sequential_data = []  # this is a list that will CONTAIN the sequences
     prev_days = deque(maxlen=SEQ_LEN)  # These will be our actual sequences. They are made with deque, which keeps the maximum length by popping out older values as new ones come in
@@ -119,60 +110,60 @@ main_df = main_df[(main_df.index < last_5pct)]
 
 # print(main_df)
 
-train_x, train_y = preprocess_df(main_df)
-validation_x, validation_y = preprocess_df(validation_main_df)
+# train_x, train_y = preprocess_df(main_df)
+# validation_x, validation_y = preprocess_df(validation_main_df)
 
-print(f"train data: {len(train_x)} validation: {len(validation_x)}")
-print(f"Dont buys: {train_y.count(0)}, buys: {train_y.count(1)}")
-print(f"VALIDATION Dont buys: {validation_y.count(0)}, buys: {validation_y.count(1)}")
+# print(f"train data: {len(train_x)} validation: {len(validation_x)}")
+# print(f"Dont buys: {train_y.count(0)}, buys: {train_y.count(1)}")
+# print(f"VALIDATION Dont buys: {validation_y.count(0)}, buys: {validation_y.count(1)}")
 
-# print(validation_x)
+print(validation_x)
 
-model = Sequential()
-model.add(CuDNNLSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
-#model.add(Dropout(0.2))
-model.add(BatchNormalization())  #normalizes activation outputs, same reason you want to normalize your input data.
+# model = Sequential()
+# model.add(CuDNNLSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
+# #model.add(Dropout(0.2))
+# model.add(BatchNormalization())  #normalizes activation outputs, same reason you want to normalize your input data.
 
-model.add(CuDNNLSTM(128, return_sequences=True))
-model.add(Dropout(0.1))
-model.add(BatchNormalization())
+# model.add(CuDNNLSTM(128, return_sequences=True))
+# model.add(Dropout(0.1))
+# model.add(BatchNormalization())
 
-model.add(CuDNNLSTM(220))
-model.add(Dropout(0.2))
-model.add(BatchNormalization())
+# model.add(CuDNNLSTM(220))
+# model.add(Dropout(0.2))
+# model.add(BatchNormalization())
 
-model.add(Dense(32, activation='relu'))
-model.add(Dropout(0.2))
+# model.add(Dense(32, activation='relu'))
+# model.add(Dropout(0.2))
 
-model.add(Dense(2, activation='softmax'))
+# model.add(Dense(2, activation='softmax'))
 
 
-opt = tf.keras.optimizers.Adam(lr=0.001, decay=1e-6)
+# opt = tf.keras.optimizers.Adam(lr=0.001, decay=1e-6)
 
-# Compile model
-model.compile(
-    loss='sparse_categorical_crossentropy',
-    optimizer=opt,
-    metrics=['accuracy']
-)
+# # Compile model
+# model.compile(
+#     loss='sparse_categorical_crossentropy',
+#     optimizer=opt,
+#     metrics=['accuracy']
+# )
 
-tensorboard = TensorBoard(log_dir="logs/{}".format(NAME))
+# tensorboard = TensorBoard(log_dir="logs/{}".format(NAME))
 
-filepath = "RNN_Final-{epoch:02d}-{val_acc:.3f}"  # unique file name that will include the epoch and the validation acc for that epoch
-checkpoint = ModelCheckpoint("models/{}.model".format(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')) # saves only the best ones
+# filepath = "RNN_Final-{epoch:02d}-{val_acc:.3f}"  # unique file name that will include the epoch and the validation acc for that epoch
+# checkpoint = ModelCheckpoint("models/{}.model".format(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')) # saves only the best ones
 
-# Train model
-history = model.fit(
-    train_x, train_y,
-    batch_size=BATCH_SIZE,
-    epochs=EPOCHS,
-    validation_data=(validation_x, validation_y),
-    callbacks=[tensorboard, checkpoint],
-)
+# # Train model
+# history = model.fit(
+#     train_x, train_y,
+#     batch_size=BATCH_SIZE,
+#     epochs=EPOCHS,
+#     validation_data=(validation_x, validation_y),
+#     callbacks=[tensorboard, checkpoint],
+# )
 
-# Score model
-score = model.evaluate(validation_x, validation_y, verbose=0)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
-# Save model
-model.save("models/{}".format(NAME))
+# # Score model
+# score = model.evaluate(validation_x, validation_y, verbose=0)
+# print('Test loss:', score[0])
+# print('Test accuracy:', score[1])
+# # Save model
+# model.save("models/{}".format(NAME))

@@ -13,6 +13,8 @@
 
         <div id="myDiv"></div>
 
+        <div id="graph"></div>
+
         <div id="myGauge"></div>
         <br><br>
 
@@ -62,11 +64,12 @@
 
   <script>
     {% block jquery %}
-    var endpoint1 = '/api/chart/TimeSeriesDailyAdjusted/'
+    var endpoint1 = '/api/chart/data/'
     var defaultData = [];
     var defaultDataEMA1 = [];
     var defaultDataEMA2 = [];
-    var news = []; 
+    var pred = [];
+    var orig = [];
     var sentiment;
 
         $.ajax({
@@ -76,10 +79,13 @@
                     defaultData = alldata.defaultDaily
                     defaultDataEMA1 = alldata.defaultEMA1                
                     defaultDataEMA2 = alldata.defaultEMA2   
-                    sentiment = alldata.sentiment             
+                    sentiment = alldata.sentiment   
+                    pred = alldata.predict
+                    orig = alldata.original        
                     setChart1()
                     setChart2()
                     setGauge()
+                    set_prid_orig()
                     //setChart3()
                     //setChartMACD()
                     $("#progress").hide()
@@ -89,6 +95,52 @@
                     console.log(error_data)
                 }
             });
+
+            function set_prid_orig() {
+                var trace1 = {
+                    x: pred.date, 
+                    
+                    open:  pred.open,
+                    high:  pred.high,
+                    low:  pred.low,
+                    close: pred.close,
+                    
+                    increasing: {line: {color: '#17BECF'}}, 
+                    decreasing: {line: {color: '#7F7F7F'}},
+                    line: {color: 'rgba(31,119,180,1)'}, 
+                    
+                    type: 'candlestick', 
+                    xaxis: 'x', 
+                    yaxis: 'y',
+                    name:'Pridicted'
+                    };
+
+                var trace2 = {
+                    x: orig.date, 
+                    
+                    open:  orig.open,
+                    high:  orig.high,
+                    low:  orig.low,
+                    close: orig.close,
+                    
+                    increasing: {line: {color: '#0000ff'}}, 
+                    decreasing: {line: {color: '#ff0000'}},
+                    line: {color: 'rgba(31,119,180,1)'}, 
+                    
+                    type: 'candlestick', 
+                    xaxis: 'x', 
+                    yaxis: 'y',
+                    name:'Original'
+                    };
+
+                var layout = {
+                title: 'prediction'
+                };
+
+                var data = [trace1,trace2];
+
+                Plotly.newPlot('graph', data, layout);
+            }
 
             function setGauge(){
                 // Enter a speed between 0 and 180
