@@ -1,0 +1,2642 @@
+{
+  "response": { "status": 200 },
+  "symbol": {
+    "id": 686,
+    "symbol": "AAPL",
+    "title": "Apple Inc.",
+    "aliases": [],
+    "is_following": false,
+    "watchlist_count": 253978
+  },
+  "cursor": {
+    "more": true,
+    "since": 139158913,
+    "max": 139151394
+  },
+  "messages": [
+    {
+      "id": 139158913,
+      "body": "$WFC Heavily long from here\u2014- We will see $BAC $JPM $XLF $SPY $MU $AMAT $JD $BABA $TLRY $TWTR $FB $AAPL $NFLX Good Luck to all #Longs",
+      "created_at": "2018-09-28T04:35:29Z",
+      "user": {
+        "id": 1231190,
+        "username": "Abir___Aziz",
+        "name": "Abir Aziz",
+        "avatar_url": "https://avatars.stocktwits.com/production/1231190/thumb-1511647361.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/1231190/thumb-1511647361.png",
+        "join_date": "2017-10-17",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 1343,
+        "following": 386,
+        "ideas": 4326,
+        "watchlist_stocks_count": 278,
+        "like_count": 662
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253978
+        },
+        {
+          "id": 827,
+          "symbol": "AMAT",
+          "title": "Applied Materials Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 15577
+        },
+        {
+          "id": 2839,
+          "symbol": "NFLX",
+          "title": "Netflix, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 146767
+        },
+        {
+          "id": 4438,
+          "symbol": "BAC",
+          "title": "Bank of America Corporation",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 65510
+        },
+        {
+          "id": 6020,
+          "symbol": "JPM",
+          "title": "JPMorgan Chase & Co.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 29135
+        },
+        {
+          "id": 6403,
+          "symbol": "MU",
+          "title": "Micron Technology Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 75767
+        },
+        {
+          "id": 7271,
+          "symbol": "SPY",
+          "title": "SPDR S&P 500",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 97841
+        },
+        {
+          "id": 7718,
+          "symbol": "WFC",
+          "title": "Wells Fargo & Company",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 23386
+        },
+        {
+          "id": 7816,
+          "symbol": "XLF",
+          "title": "Financial Select Sector SPDR",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 9063
+        },
+        {
+          "id": 7871,
+          "symbol": "FB",
+          "title": "Facebook",
+          "aliases": [ "FBOOK" ],
+          "is_following": false,
+          "watchlist_count": 184293
+        },
+        {
+          "id": 7872,
+          "symbol": "TWTR",
+          "title": "Twitter",
+          "aliases": [ "TWIT" ],
+          "is_following": false,
+          "watchlist_count": 120610
+        },
+        {
+          "id": 12017,
+          "symbol": "JD",
+          "title": "JD.com",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 26140
+        },
+        {
+          "id": 12100,
+          "symbol": "BABA",
+          "title": "Alibaba",
+          "aliases": [ "ALIBABA" ],
+          "is_following": false,
+          "watchlist_count": 120721
+        },
+        {
+          "id": 14741,
+          "symbol": "TLRY",
+          "title": "Tilray, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 26102
+        }
+      ],
+      "mentioned_users": [],
+      "entities": { "sentiment": { "basic": "Bullish" } }
+    },
+    {
+      "id": 139158673,
+      "body": "Price Returns vs Expected Daily Move $PBR $SQ $EWZ $AAPL $AMZN $AMD $GE $FB $NFLX $EEM $BAC $VXX http://tinyurl.com/y7zbwhgq",
+      "created_at": "2018-09-28T04:29:45Z",
+      "user": {
+        "id": 800154,
+        "username": "marketchameleonwins",
+        "name": "marketchameleon",
+        "avatar_url": "https://avatars.stocktwits.com/production/800154/thumb-1470414114.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/800154/thumb-1470414114.png",
+        "join_date": "2016-07-21",
+        "official": true,
+        "identity": "Official",
+        "classification": [ "official" ],
+        "followers": 10524,
+        "following": 347,
+        "ideas": 121483,
+        "watchlist_stocks_count": 1,
+        "like_count": 303
+      },
+      "source": {
+        "id": 2931,
+        "title": "MarketChameleon.com",
+        "url": "https://marketchameleon.com"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253975
+        },
+        {
+          "id": 864,
+          "symbol": "AMZN",
+          "title": "Amazon.com Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 168877
+        },
+        {
+          "id": 2839,
+          "symbol": "NFLX",
+          "title": "Netflix, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 146767
+        },
+        {
+          "id": 4331,
+          "symbol": "AMD",
+          "title": "Advanced Micro Devices, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 143195
+        },
+        {
+          "id": 4438,
+          "symbol": "BAC",
+          "title": "Bank of America Corporation",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 65510
+        },
+        {
+          "id": 5122,
+          "symbol": "EEM",
+          "title": "iShares MSCI Emerging Markets Index",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 4535
+        },
+        {
+          "id": 5267,
+          "symbol": "EWZ",
+          "title": "iShares MSCI Brazil Index",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 2941
+        },
+        {
+          "id": 5481,
+          "symbol": "GE",
+          "title": "General Electric Co.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 59912
+        },
+        {
+          "id": 6685,
+          "symbol": "PBR",
+          "title": "Petroleo Brasileiro",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 7737
+        },
+        {
+          "id": 7693,
+          "symbol": "VXX",
+          "title": "iPath S&P 500 VIX Short-Term Futures ETN",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 16583
+        },
+        {
+          "id": 7871,
+          "symbol": "FB",
+          "title": "Facebook",
+          "aliases": [ "FBOOK" ],
+          "is_following": false,
+          "watchlist_count": 184294
+        },
+        {
+          "id": 7991,
+          "symbol": "SQ",
+          "title": "Square",
+          "aliases": [ "SQUARE" ],
+          "is_following": false,
+          "watchlist_count": 54380
+        }
+      ],
+      "links": [
+        {
+          "title": "Dashboard | Options Market Dashboard | MarketChameleon",
+          "url": "http://tinyurl.com/y7zbwhgq",
+          "shortened_url": "http://tinyurl.com/y7zbwhgq",
+          "shortened_expanded_url": "marketchameleon.com/Home/Da...",
+          "description": "A helpful daily snapshot of stock price changes and performance in key sectors, as well as option implied volatility and unusual volume activity to help you start your trading day. Data is presented in easy-to-read graphs, all on one page.",
+          "image": "https://www.stockinvestor.com/wp-content/uploads/2017/11/perry-top-div-payer-report-cover-3d.png",
+          "created_at": "2018-09-28T04:29:46Z",
+          "video_url": null,
+          "source": {
+            "name": "Marketchameleon",
+            "website": "https://marketchameleon.com"
+          }
+        }
+      ],
+      "mentioned_users": [],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139158634,
+      "body": "Friday\u2019s \ud83d\udc40 1 $AMZN $AAPL $AMD $FB $GOOGL $ATVI $EA $BABA $BA $BB $CRM $GWPH $I $INTC $MSFT $BTC.X $ETH.X $AMRN $AMRS $IGC $CCJ $DTEA $ENPH",
+      "created_at": "2018-09-28T04:28:47Z",
+      "user": {
+        "id": 850976,
+        "username": "MariaC82",
+        "name": "Maria Chaudhry",
+        "avatar_url": "https://avatars.stocktwits.com/production/850976/thumb-1478239847.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/850976/thumb-1478239847.png",
+        "join_date": "2016-09-30",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 25535,
+        "following": 201,
+        "ideas": 22918,
+        "watchlist_stocks_count": 295,
+        "like_count": 38517
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 283,
+          "symbol": "IGC",
+          "title": "India Globalization Capital, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 19519
+        },
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253975
+        },
+        {
+          "id": 853,
+          "symbol": "AMRN",
+          "title": "Amarin Corporation plc",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 13021
+        },
+        {
+          "id": 864,
+          "symbol": "AMZN",
+          "title": "Amazon.com Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 168877
+        },
+        {
+          "id": 986,
+          "symbol": "ATVI",
+          "title": "Activision Blizzard, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 25673
+        },
+        {
+          "id": 1766,
+          "symbol": "EA",
+          "title": "Electronic Arts Inc.",
+          "aliases": [ "ERTS" ],
+          "is_following": false,
+          "watchlist_count": 11950
+        },
+        {
+          "id": 2310,
+          "symbol": "INTC",
+          "title": "Intel Corporation",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 47582
+        },
+        {
+          "id": 2735,
+          "symbol": "MSFT",
+          "title": "Microsoft Corporation",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 97279
+        },
+        {
+          "id": 3379,
+          "symbol": "BB",
+          "title": "BlackBerry",
+          "aliases": [ "RIMM", "BBRY" ],
+          "is_following": false,
+          "watchlist_count": 30713
+        },
+        {
+          "id": 4331,
+          "symbol": "AMD",
+          "title": "Advanced Micro Devices, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 143195
+        },
+        {
+          "id": 4437,
+          "symbol": "BA",
+          "title": "Boeing Co.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 24879
+        },
+        {
+          "id": 4679,
+          "symbol": "CCJ",
+          "title": "Cameco Corp.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 3205
+        },
+        {
+          "id": 4828,
+          "symbol": "CRM",
+          "title": "Salesforce.com",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 18278
+        },
+        {
+          "id": 7871,
+          "symbol": "FB",
+          "title": "Facebook",
+          "aliases": [ "FBOOK" ],
+          "is_following": false,
+          "watchlist_count": 184293
+        },
+        {
+          "id": 9305,
+          "symbol": "AMRS",
+          "title": "Amyris Inc",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 16756
+        },
+        {
+          "id": 11229,
+          "symbol": "ENPH",
+          "title": "Enphase Energy",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 7391
+        },
+        {
+          "id": 11418,
+          "symbol": "BTC.X",
+          "title": "Bitcoin BTC/USD",
+          "aliases": [ "BTCUSD" ],
+          "is_following": false,
+          "watchlist_count": 109561
+        },
+        {
+          "id": 11460,
+          "symbol": "I",
+          "title": "Intelsat",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 3048
+        },
+        {
+          "id": 11601,
+          "symbol": "GWPH",
+          "title": "GW Pharmaceuticals plc",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 12448
+        },
+        {
+          "id": 11938,
+          "symbol": "GOOGL",
+          "title": "Alphabet Inc. Class A",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 54196
+        },
+        {
+          "id": 12100,
+          "symbol": "BABA",
+          "title": "Alibaba",
+          "aliases": [ "ALIBABA" ],
+          "is_following": false,
+          "watchlist_count": 120721
+        },
+        {
+          "id": 12573,
+          "symbol": "DTEA",
+          "title": "DAVIDsTEA",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 3001
+        },
+        {
+          "id": 13016,
+          "symbol": "ETH.X",
+          "title": "Ethereum",
+          "aliases": [ "ETHUSD" ],
+          "is_following": false,
+          "watchlist_count": 60802
+        }
+      ],
+      "likes": {
+        "total": 4,
+        "user_ids": [ 1385006, 1143447, 1144668, 1508234 ]
+      },
+      "mentioned_users": [],
+      "entities": {
+        "chart": {
+          "thumb": "https://charts.stocktwits.com/production/small_139158634.png",
+          "large": "https://charts.stocktwits.com/production/large_139158634.png",
+          "original": "https://charts.stocktwits.com/production/original_139158634.png",
+          "url": "https://charts.stocktwits.com/production/original_139158634.png"
+        },
+        "sentiment": null
+      }
+    },
+    {
+      "id": 139158133,
+      "body": "$AAPL $SPY $BABA made 45k today, these little bears here have no idea what they are missing for not going long",
+      "created_at": "2018-09-28T04:16:18Z",
+      "user": {
+        "id": 722015,
+        "username": "bzibarth",
+        "name": "Bruno Zibarth",
+        "avatar_url": "https://avatars.stocktwits.com/production/722015/thumb-1514763399.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/722015/thumb-1514763399.png",
+        "join_date": "2016-04-05",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 5,
+        "following": 58,
+        "ideas": 122,
+        "watchlist_stocks_count": 11,
+        "like_count": 193
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253974
+        },
+        {
+          "id": 7271,
+          "symbol": "SPY",
+          "title": "SPDR S&P 500",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 97839
+        },
+        {
+          "id": 12100,
+          "symbol": "BABA",
+          "title": "Alibaba",
+          "aliases": [ "ALIBABA" ],
+          "is_following": false,
+          "watchlist_count": 120721
+        }
+      ],
+      "reshare_message": {
+        "reshared_count": 1,
+        "reshared_deleted": false,
+        "reshared_user_deleted": false,
+        "parent_reshared_deleted": false,
+        "message": {
+          "id": 139152174,
+          "body": "$AAPL had a good day from one of my big position ( over 500k invested in AAPL )  $SPY $BABA",
+          "created_at": "2018-09-28T02:36:46Z",
+          "user": {
+            "id": 1485329,
+            "username": "wallstreet_gangsta2",
+            "name": "Fan",
+            "avatar_url": "https://avatars.stocktwits.com/production/1485329/thumb-1525313787.png",
+            "avatar_url_ssl": "https://avatars.stocktwits.com/production/1485329/thumb-1525313787.png",
+            "join_date": "2018-05-03",
+            "official": false,
+            "identity": "User",
+            "classification": [],
+            "followers": 55,
+            "following": 0,
+            "ideas": 268,
+            "watchlist_stocks_count": 0,
+            "like_count": 14
+          },
+          "source": {
+            "id": 1149,
+            "title": "StockTwits for iOS",
+            "url": "http://www.stocktwits.com/mobile"
+          },
+          "symbols": [
+            {
+              "id": 686,
+              "symbol": "AAPL",
+              "title": "Apple Inc.",
+              "aliases": [],
+              "is_following": false,
+              "watchlist_count": 253974
+            },
+            {
+              "id": 7271,
+              "symbol": "SPY",
+              "title": "SPDR S&P 500",
+              "aliases": [],
+              "is_following": false,
+              "watchlist_count": 97839
+            },
+            {
+              "id": 12100,
+              "symbol": "BABA",
+              "title": "Alibaba",
+              "aliases": [ "ALIBABA" ],
+              "is_following": false,
+              "watchlist_count": 120721
+            }
+          ],
+          "conversation": {
+            "parent_message_id": 139152174,
+            "in_reply_to_message_id": null,
+            "parent": true,
+            "replies": 3
+          },
+          "likes": {
+            "total": 9,
+            "user_ids": [ 743963, 1054010, 1601763, 987490, 1231080, 1243909, 725845, 1224856, 722015 ]
+          },
+          "mentioned_users": [],
+          "entities": {
+            "chart": {
+              "thumb": "https://charts.stocktwits.com/production/small_139152174.png",
+              "large": "https://charts.stocktwits.com/production/large_139152174.png",
+              "original": "https://charts.stocktwits.com/production/original_139152174.png",
+              "url": "https://charts.stocktwits.com/production/original_139152174.png"
+            },
+            "sentiment": null
+          }
+        }
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139157268,
+      "body": "$AAPL I need my Lambo.",
+      "created_at": "2018-09-28T03:58:55Z",
+      "user": {
+        "id": 319854,
+        "username": "Capitolalb",
+        "name": "Larry Brightwell",
+        "avatar_url": "https://avatars.stocktwits.com/production/319854/thumb-1394763354.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/319854/thumb-1394763354.png",
+        "join_date": "2014-02-25",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 29,
+        "following": 5,
+        "ideas": 1777,
+        "watchlist_stocks_count": 55,
+        "like_count": 8876
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253975
+        }
+      ],
+      "likes": {
+        "total": 2,
+        "user_ids": [ 1355347, 1447458 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": { "basic": "Bullish" } }
+    },
+    {
+      "id": 139156859,
+      "body": "$AAPL",
+      "created_at": "2018-09-28T03:51:25Z",
+      "user": {
+        "id": 650927,
+        "username": "mantypat",
+        "name": "Mantypat",
+        "avatar_url": "https://avatars.stocktwits.com/production/650927/thumb-1537285597.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/650927/thumb-1537285597.png",
+        "join_date": "2015-12-12",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 9,
+        "following": 119,
+        "ideas": 18,
+        "watchlist_stocks_count": 32,
+        "like_count": 1
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253973
+        }
+      ],
+      "likes": {
+        "total": 1,
+        "user_ids": [ 319854 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": { "basic": "Bullish" } }
+    },
+    {
+      "id": 139156819,
+      "body": "$NVDA $AAPL $AMD  O well, this has been a long time coming.  Out of balance arrangement needs rebalancing and it will take some readjusting.",
+      "created_at": "2018-09-28T03:50:34Z",
+      "user": {
+        "id": 911299,
+        "username": "jcobjcob",
+        "name": "John John The Pipers son.",
+        "avatar_url": "http://avatars.stocktwits.com/images/default_avatar_thumb.jpg",
+        "avatar_url_ssl": "https://s3.amazonaws.com/st-avatars/images/default_avatar_thumb.jpg",
+        "join_date": "2016-12-28",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 7,
+        "following": 5,
+        "ideas": 2415,
+        "watchlist_stocks_count": 3,
+        "like_count": 2306
+      },
+      "source": {
+        "id": 2095,
+        "title": "StockTwits For Android ",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253972
+        },
+        {
+          "id": 2925,
+          "symbol": "NVDA",
+          "title": "NVIDIA Corporation",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 109463
+        },
+        {
+          "id": 4331,
+          "symbol": "AMD",
+          "title": "Advanced Micro Devices, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 143188
+        }
+      ],
+      "reshare_message": {
+        "reshared_count": 2,
+        "reshared_deleted": false,
+        "reshared_user_deleted": false,
+        "parent_reshared_deleted": false,
+        "message": {
+          "id": 139152297,
+          "body": "$AAPL $AMD $NVDA \nTrump&#39;s tariffs on Chinese goods to affect some AMD and Nvidia gaming graphics cards https://www.cnbc.com/2018/09/27/trumps-tariffs-on-chinese-goods-to-hit-amd-nvidia-gaming-graphics-cards.html",
+          "created_at": "2018-09-28T02:38:28Z",
+          "user": {
+            "id": 866286,
+            "username": "Lutar",
+            "name": "John",
+            "avatar_url": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+            "avatar_url_ssl": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+            "join_date": "2016-10-25",
+            "official": false,
+            "identity": "User",
+            "classification": [],
+            "followers": 44,
+            "following": 9,
+            "ideas": 3630,
+            "watchlist_stocks_count": 22,
+            "like_count": 2730
+          },
+          "source": {
+            "id": 1149,
+            "title": "StockTwits for iOS",
+            "url": "http://www.stocktwits.com/mobile"
+          },
+          "symbols": [
+            {
+              "id": 686,
+              "symbol": "AAPL",
+              "title": "Apple Inc.",
+              "aliases": [],
+              "is_following": false,
+              "watchlist_count": 253972
+            },
+            {
+              "id": 2925,
+              "symbol": "NVDA",
+              "title": "NVIDIA Corporation",
+              "aliases": [],
+              "is_following": false,
+              "watchlist_count": 109463
+            },
+            {
+              "id": 4331,
+              "symbol": "AMD",
+              "title": "Advanced Micro Devices, Inc.",
+              "aliases": [],
+              "is_following": false,
+              "watchlist_count": 143188
+            }
+          ],
+          "conversation": {
+            "parent_message_id": 139152297,
+            "in_reply_to_message_id": null,
+            "parent": true,
+            "replies": 2
+          },
+          "links": [
+            {
+              "title": "Trump's tariffs on Chinese goods to affect some AMD and Nvidia gaming graphics cards",
+              "url": "https://www.cnbc.com/2018/09/27/trumps-tariffs-on-chinese-goods-to-hit-amd-nvidia-gaming-graphics-cards.html",
+              "shortened_url": "https://www.cnbc.com/2018/09/27/trumps-tariffs-on-chinese-goods-to-hit-amd-nvidia-gaming-graphics-cards.html",
+              "shortened_expanded_url": "cnbc.com/2018/09/27/trumps-...",
+              "description": "Neil Godwin | Maximum PC Magazine | Getty Images President Donald Trump's trade war with China may lead to higher PC graphics card prices this holiday. The Trump administration's latest tariffs of 10 percent on $200 billion of imports from China took effect Monday.",
+              "image": "https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2017/06/05/104510864-GettyImages-657222368-AMD.1910x1000.jpg",
+              "created_at": "2018-09-28T02:38:28Z",
+              "video_url": null,
+              "source": {
+                "name": "CNBC",
+                "website": "https://www.cnbc.com"
+              }
+            }
+          ],
+          "likes": {
+            "total": 1,
+            "user_ids": [ 1534361 ]
+          },
+          "mentioned_users": [],
+          "entities": { "sentiment": null }
+        }
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139156781,
+      "body": "$AAPL $227 tomorrow",
+      "created_at": "2018-09-28T03:49:55Z",
+      "user": {
+        "id": 699413,
+        "username": "Danielzr",
+        "name": "Danielzr",
+        "avatar_url": "https://avatars.stocktwits.com/production/699413/thumb-1534964165.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/699413/thumb-1534964165.png",
+        "join_date": "2016-03-04",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 50,
+        "following": 77,
+        "ideas": 2964,
+        "watchlist_stocks_count": 10,
+        "like_count": 414
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253975
+        }
+      ],
+      "likes": {
+        "total": 2,
+        "user_ids": [ 319854, 1624256 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": { "basic": "Bullish" } }
+    },
+    {
+      "id": 139156133,
+      "body": "$AAPL Gimmee a Friday FG to 227.50. Time robust back like the old days!",
+      "created_at": "2018-09-28T03:40:28Z",
+      "user": {
+        "id": 501373,
+        "username": "sjs7",
+        "name": "Stephen Salerno",
+        "avatar_url": "http://avatars.stocktwits.com/images/default_avatar_thumb.jpg",
+        "avatar_url_ssl": "https://s3.amazonaws.com/st-avatars/images/default_avatar_thumb.jpg",
+        "join_date": "2015-04-15",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 17,
+        "following": 65,
+        "ideas": 1347,
+        "watchlist_stocks_count": 18,
+        "like_count": 199
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253973
+        }
+      ],
+      "likes": {
+        "total": 1,
+        "user_ids": [ 319854 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": { "basic": "Bullish" } }
+    },
+    {
+      "id": 139155654,
+      "body": "This market keeps telling us what it wants to do next: http://crackedmarket.com/2018/09/you-call-that-a-taper-tantrum/\n$SPY $SPX $ES_F $QQQ $IWM $AAPL $AMZN $FB $NFLX $TSLA",
+      "created_at": "2018-09-28T03:33:39Z",
+      "user": {
+        "id": 161317,
+        "username": "CrackedMarket",
+        "name": "Jani Ziedins",
+        "avatar_url": "https://avatars.stocktwits.com/production/161317/thumb-1473187137.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/161317/thumb-1473187137.png",
+        "join_date": "2012-06-04",
+        "official": true,
+        "identity": "Official",
+        "classification": [ "suggested", "official" ],
+        "followers": 28101,
+        "following": 30,
+        "ideas": 2162,
+        "watchlist_stocks_count": 2,
+        "like_count": 25
+      },
+      "source": {
+        "id": 2269,
+        "title": "StockTwits Web",
+        "url": "https://stocktwits.com"
+      },
+      "symbols": [
+        {
+          "id": 647,
+          "symbol": "ES_F",
+          "title": "E-Mini S&P 500 Futures",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 8386
+        },
+        {
+          "id": 679,
+          "symbol": "SPX",
+          "title": "S&P 500 Index",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 32911
+        },
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253972
+        },
+        {
+          "id": 864,
+          "symbol": "AMZN",
+          "title": "Amazon.com Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 168872
+        },
+        {
+          "id": 2839,
+          "symbol": "NFLX",
+          "title": "Netflix, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 146764
+        },
+        {
+          "id": 5930,
+          "symbol": "IWM",
+          "title": "iShares Russell 2000 Index ETF",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 11233
+        },
+        {
+          "id": 7271,
+          "symbol": "SPY",
+          "title": "SPDR S&P 500",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 97837
+        },
+        {
+          "id": 7871,
+          "symbol": "FB",
+          "title": "Facebook",
+          "aliases": [ "FBOOK" ],
+          "is_following": false,
+          "watchlist_count": 184292
+        },
+        {
+          "id": 8660,
+          "symbol": "TSLA",
+          "title": "Tesla, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 178467
+        },
+        {
+          "id": 9581,
+          "symbol": "QQQ",
+          "title": "PowerShares Nasdaq-100 QQQ",
+          "aliases": [ "QQQQ" ],
+          "is_following": false,
+          "watchlist_count": 33219
+        }
+      ],
+      "conversation": {
+        "parent_message_id": 139155654,
+        "in_reply_to_message_id": null,
+        "parent": true,
+        "replies": 1
+      },
+      "links": [
+        {
+          "title": "You call that a taper tantrum?",
+          "url": "http://crackedmarket.com/2018/09/you-call-that-a-taper-tantrum/",
+          "shortened_url": "http://crackedmarket.com/2018/09/you-call-that-a-taper-tantrum/",
+          "shortened_expanded_url": "cracked.market/2018/09/you-...",
+          "description": "Free After-Hours Update: On Thursday the S&P 500 recovered Wednesday's late-day selloff and continues consolidating recent gains above 2,900 support. But this is failed selloff is no surprise for regular readers of this blog. This what I wrote a few days ago and Thursday's rebound played out exactly as expected: \"This market most definitely doesn't want to go down.",
+          "image": "https://cracked.market/wp-content/uploads/2018/09/Screen-Shot-2018-09-27-at-9.27.19-PM.png",
+          "created_at": "2018-09-28T03:33:42Z",
+          "video_url": null,
+          "source": {
+            "name": "Cracked.Market",
+            "website": "https://cracked.market"
+          }
+        }
+      ],
+      "likes": {
+        "total": 1,
+        "user_ids": [ 551323 ]
+      },
+      "mentioned_users": [],
+      "entities": {
+        "chart": {
+          "thumb": "https://charts.stocktwits.com/production/small_139155654.png",
+          "large": "https://charts.stocktwits.com/production/large_139155654.png",
+          "original": "https://charts.stocktwits.com/production/original_139155654.png",
+          "url": "https://charts.stocktwits.com/production/original_139155654.png"
+        },
+        "sentiment": null
+      }
+    },
+    {
+      "id": 139155615,
+      "body": "$AAPL may break out. Our analyzer suggests a buy stop @228.38 with a stop @217.64 as a possible low risk setup.. https://www.chartmill.com/analyze.php?utm_source=stocktwits&amp;utm_medium=TA&amp;utm_content=TRADINGSETUP&amp;utm_campaign=social_tracking#/AAPL?key=bb853040-a4ac-41c6-b549-d218d2f21b32",
+      "created_at": "2018-09-28T03:32:55Z",
+      "user": {
+        "id": 47688,
+        "username": "ChartMill",
+        "name": "ChartMill",
+        "avatar_url": "https://avatars.stocktwits.com/production/47688/thumb-1363343728.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/47688/thumb-1363343728.png",
+        "join_date": "2011-01-26",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 8010,
+        "following": 916,
+        "ideas": 369967,
+        "watchlist_stocks_count": 20,
+        "like_count": 32
+      },
+      "source": {
+        "id": 3193,
+        "title": "Chartmill alerts",
+        "url": "http://www.chartmill.com"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253971
+        }
+      ],
+      "links": [
+        {
+          "title": "ChartMill.com | Technical Analysis Report",
+          "url": "https://www.chartmill.com/analyze.php?utm_source=stocktwits&utm_medium=TA&utm_content=TRADINGSETUP&utm_campaign=social_tracking#/AAPL?key=bb853040-a4ac-41c6-b549-d218d2f21b32",
+          "shortened_url": "https://www.chartmill.com/analyze.php?utm_source=stocktwits&utm_medium=TA&utm_content=TRADINGSETUP&utm_campaign=social_tracking#/AAPL?key=bb853040-a4ac-41c6-b549-d218d2f21b32",
+          "shortened_expanded_url": "chartmill.com/analyze.php?u...",
+          "description": "Technical Analysis reports, inspect technical and setup rating of stocks on NASDAQ,NYSE,AMEX and Euronext",
+          "image": null,
+          "created_at": "2018-09-28T03:32:56Z",
+          "video_url": null,
+          "source": {
+            "name": "Chartmill",
+            "website": "https://www.chartmill.com"
+          }
+        }
+      ],
+      "mentioned_users": [ "@228", "@217" ],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139154833,
+      "body": "$AAPL @4LT3 $AAPL some ppl are bad in everything they do. Cannot even block properly.",
+      "created_at": "2018-09-28T03:19:02Z",
+      "user": {
+        "id": 866286,
+        "username": "Lutar",
+        "name": "John",
+        "avatar_url": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+        "join_date": "2016-10-25",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 44,
+        "following": 9,
+        "ideas": 3630,
+        "watchlist_stocks_count": 22,
+        "like_count": 2730
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253975
+        }
+      ],
+      "likes": {
+        "total": 1,
+        "user_ids": [ 439831 ]
+      },
+      "reshare_message": {
+        "reshared_count": 1,
+        "reshared_deleted": false,
+        "reshared_user_deleted": false,
+        "parent_reshared_deleted": false,
+        "parent_reshared_url": "/Lutar/message/139153102",
+        "parent_reshared_message_id": 139153102,
+        "message": {
+          "id": 139153946,
+          "body": "WTF? I blocked you @Lutar still see tour garbage littering the street.",
+          "created_at": "2018-09-28T03:04:26Z",
+          "user": {
+            "id": 1217248,
+            "username": "4LT3",
+            "name": "4LT3",
+            "avatar_url": "https://avatars.stocktwits.com/production/1217248/thumb-1529201787.png",
+            "avatar_url_ssl": "https://avatars.stocktwits.com/production/1217248/thumb-1529201787.png",
+            "join_date": "2017-10-07",
+            "official": false,
+            "identity": "User",
+            "classification": [],
+            "followers": 69,
+            "following": 1,
+            "ideas": 662,
+            "watchlist_stocks_count": 0,
+            "like_count": 145
+          },
+          "source": {
+            "id": 2269,
+            "title": "StockTwits Web",
+            "url": "https://stocktwits.com"
+          },
+          "conversation": {
+            "parent_message_id": 139153946,
+            "in_reply_to_message_id": null,
+            "parent": true,
+            "replies": 1
+          },
+          "mentioned_users": [ "@Lutar" ],
+          "entities": { "sentiment": null }
+        }
+      },
+      "mentioned_users": [ "@4LT3" ],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139154710,
+      "body": "$INPX hey $AAPL or $GOOGL do you want to partner with me? My sensors are already in Amazon Go Stores. Who has that pic?",
+      "created_at": "2018-09-28T03:17:04Z",
+      "user": {
+        "id": 1619729,
+        "username": "INPIXON",
+        "name": "Nadir",
+        "avatar_url": "https://avatars.stocktwits.com/production/1619729/thumb-1537505261.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/1619729/thumb-1537505261.png",
+        "join_date": "2018-09-21",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 3,
+        "following": 1,
+        "ideas": 92,
+        "watchlist_stocks_count": 1,
+        "like_count": 29
+      },
+      "source": {
+        "id": 2095,
+        "title": "StockTwits For Android ",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253971
+        },
+        {
+          "id": 11938,
+          "symbol": "GOOGL",
+          "title": "Alphabet Inc. Class A",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 54195
+        },
+        {
+          "id": 11961,
+          "symbol": "INPX",
+          "title": "Inpixon",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 24874
+        }
+      ],
+      "conversation": {
+        "parent_message_id": 139154710,
+        "in_reply_to_message_id": null,
+        "parent": true,
+        "replies": 1
+      },
+      "likes": {
+        "total": 4,
+        "user_ids": [ 1431439, 1372539, 1611404, 1574620 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": { "basic": "Bullish" } }
+    },
+    {
+      "id": 139154156,
+      "body": "$AAPL looks like it\u2019s ready to break out from its pivot base! Very bullish next few days!!!",
+      "created_at": "2018-09-28T03:08:05Z",
+      "user": {
+        "id": 1396147,
+        "username": "EdwinStockTrader",
+        "name": "EdB",
+        "avatar_url": "http://avatars.stocktwits.com/images/default_avatar_thumb.jpg",
+        "avatar_url_ssl": "https://s3.amazonaws.com/st-avatars/images/default_avatar_thumb.jpg",
+        "join_date": "2018-02-02",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 76,
+        "following": 158,
+        "ideas": 3179,
+        "watchlist_stocks_count": 1,
+        "like_count": 29495
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253975
+        }
+      ],
+      "likes": {
+        "total": 1,
+        "user_ids": [ 1624256 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": { "basic": "Bullish" } }
+    },
+    {
+      "id": 139154040,
+      "body": "$AAPL new highs soon!\nJoin the 6th largest option room on StockTwits!\nhttps://www.stocktwits.com/r/PaytoPlayOptions",
+      "created_at": "2018-09-28T03:06:19Z",
+      "user": {
+        "id": 885184,
+        "username": "cwwwww5",
+        "name": "cwwwww5",
+        "avatar_url": "https://avatars.stocktwits.com/production/885184/thumb-1506373210.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/885184/thumb-1506373210.png",
+        "join_date": "2016-11-21",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 320,
+        "following": 4,
+        "ideas": 3007,
+        "watchlist_stocks_count": 20,
+        "like_count": 261
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253970
+        }
+      ],
+      "links": [
+        {
+          "title": "PaytoPlayOptions",
+          "url": "https://www.stocktwits.com/r/PaytoPlayOptions",
+          "shortened_url": "https://www.stocktwits.com/r/PaytoPlayOptions",
+          "shortened_expanded_url": "stocktwits.com/r/PaytoPlayO...",
+          "description": "Option trade alerts based on unusual activity and charts! Invest at your own risk!",
+          "image": "https://s3.amazonaws.com/rooms-prod-uploads/PaytoPlayOptions_original.png",
+          "created_at": "2018-09-28T03:06:20Z",
+          "video_url": null,
+          "source": {
+            "name": "StockTwits",
+            "website": "https://stocktwits.com"
+          }
+        }
+      ],
+      "mentioned_users": [],
+      "entities": {
+        "chart": {
+          "thumb": "https://charts.stocktwits.com/production/small_139154040.png",
+          "large": "https://charts.stocktwits.com/production/large_139154040.png",
+          "original": "https://charts.stocktwits.com/production/original_139154040.png",
+          "url": "https://charts.stocktwits.com/production/original_139154040.png"
+        },
+        "sentiment": { "basic": "Bullish" }
+      }
+    },
+    {
+      "id": 139153777,
+      "body": "$AAPL",
+      "created_at": "2018-09-28T03:01:40Z",
+      "user": {
+        "id": 997819,
+        "username": "trad3rj03",
+        "name": "Khurram",
+        "avatar_url": "https://avatars.stocktwits.com/production/997819/thumb-1489633487.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/997819/thumb-1489633487.png",
+        "join_date": "2017-03-16",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 60,
+        "following": 124,
+        "ideas": 1062,
+        "watchlist_stocks_count": 227,
+        "like_count": 958
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253975
+        }
+      ],
+      "likes": {
+        "total": 2,
+        "user_ids": [ 1140166, 1624256 ]
+      },
+      "mentioned_users": [],
+      "entities": {
+        "chart": {
+          "thumb": "https://charts.stocktwits.com/production/small_139153777.png",
+          "large": "https://charts.stocktwits.com/production/large_139153777.png",
+          "original": "https://charts.stocktwits.com/production/original_139153777.png",
+          "url": "https://charts.stocktwits.com/production/original_139153777.png"
+        },
+        "sentiment": null
+      }
+    },
+    {
+      "id": 139153658,
+      "body": "$AAPL Goos looking weekly candle. 1 day left",
+      "created_at": "2018-09-28T02:59:57Z",
+      "user": {
+        "id": 846461,
+        "username": "Tradealike",
+        "name": "Tradealike",
+        "avatar_url": "https://avatars.stocktwits.com/production/846461/thumb-1519741569.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/846461/thumb-1519741569.png",
+        "join_date": "2016-09-24",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 363,
+        "following": 77,
+        "ideas": 1609,
+        "watchlist_stocks_count": 23,
+        "like_count": 2262
+      },
+      "source": {
+        "id": 2269,
+        "title": "StockTwits Web",
+        "url": "https://stocktwits.com"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253970
+        }
+      ],
+      "mentioned_users": [],
+      "entities": {
+        "chart": {
+          "thumb": "https://charts.stocktwits.com/production/small_139153658.png",
+          "large": "https://charts.stocktwits.com/production/large_139153658.png",
+          "original": "https://charts.stocktwits.com/production/original_139153658.png",
+          "url": "https://charts.stocktwits.com/production/original_139153658.png"
+        },
+        "sentiment": null
+      }
+    },
+    {
+      "id": 139153201,
+      "body": "$AAPL $AMD $NVDA",
+      "created_at": "2018-09-28T02:52:57Z",
+      "user": {
+        "id": 1534361,
+        "username": "Billythekidd52188",
+        "name": "William Pusateri",
+        "avatar_url": "https://avatars.stocktwits.com/production/1534361/thumb-1537474019.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/1534361/thumb-1537474019.png",
+        "join_date": "2018-06-29",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 485,
+        "following": 1458,
+        "ideas": 637,
+        "watchlist_stocks_count": 45,
+        "like_count": 261
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253970
+        },
+        {
+          "id": 2925,
+          "symbol": "NVDA",
+          "title": "NVIDIA Corporation",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 109463
+        },
+        {
+          "id": 4331,
+          "symbol": "AMD",
+          "title": "Advanced Micro Devices, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 143189
+        }
+      ],
+      "reshare_message": {
+        "reshared_count": 1,
+        "reshared_deleted": false,
+        "reshared_user_deleted": false,
+        "parent_reshared_deleted": false,
+        "message": {
+          "id": 139152297,
+          "body": "$AAPL $AMD $NVDA \nTrump&#39;s tariffs on Chinese goods to affect some AMD and Nvidia gaming graphics cards https://www.cnbc.com/2018/09/27/trumps-tariffs-on-chinese-goods-to-hit-amd-nvidia-gaming-graphics-cards.html",
+          "created_at": "2018-09-28T02:38:28Z",
+          "user": {
+            "id": 866286,
+            "username": "Lutar",
+            "name": "John",
+            "avatar_url": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+            "avatar_url_ssl": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+            "join_date": "2016-10-25",
+            "official": false,
+            "identity": "User",
+            "classification": [],
+            "followers": 44,
+            "following": 9,
+            "ideas": 3625,
+            "watchlist_stocks_count": 22,
+            "like_count": 2730
+          },
+          "source": {
+            "id": 1149,
+            "title": "StockTwits for iOS",
+            "url": "http://www.stocktwits.com/mobile"
+          },
+          "symbols": [
+            {
+              "id": 686,
+              "symbol": "AAPL",
+              "title": "Apple Inc.",
+              "aliases": [],
+              "is_following": false,
+              "watchlist_count": 253970
+            },
+            {
+              "id": 2925,
+              "symbol": "NVDA",
+              "title": "NVIDIA Corporation",
+              "aliases": [],
+              "is_following": false,
+              "watchlist_count": 109463
+            },
+            {
+              "id": 4331,
+              "symbol": "AMD",
+              "title": "Advanced Micro Devices, Inc.",
+              "aliases": [],
+              "is_following": false,
+              "watchlist_count": 143189
+            }
+          ],
+          "links": [
+            {
+              "title": "Trump's tariffs on Chinese goods to affect some AMD and Nvidia gaming graphics cards",
+              "url": "https://www.cnbc.com/2018/09/27/trumps-tariffs-on-chinese-goods-to-hit-amd-nvidia-gaming-graphics-cards.html",
+              "shortened_url": "https://www.cnbc.com/2018/09/27/trumps-tariffs-on-chinese-goods-to-hit-amd-nvidia-gaming-graphics-cards.html",
+              "shortened_expanded_url": "cnbc.com/2018/09/27/trumps-...",
+              "description": "Neil Godwin | Maximum PC Magazine | Getty Images President Donald Trump's trade war with China may lead to higher PC graphics card prices this holiday. The Trump administration's latest tariffs of 10 percent on $200 billion of imports from China took effect Monday.",
+              "image": "https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2017/06/05/104510864-GettyImages-657222368-AMD.1910x1000.jpg",
+              "created_at": "2018-09-28T02:38:28Z",
+              "video_url": null,
+              "source": {
+                "name": "CNBC",
+                "website": "https://www.cnbc.com"
+              }
+            }
+          ],
+          "likes": {
+            "total": 1,
+            "user_ids": [ 1534361 ]
+          },
+          "mentioned_users": [],
+          "entities": { "sentiment": null }
+        }
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139153102,
+      "body": "$AAPL More US corporate giants warn tariffs will mean price hikes but genius Trump said that consumers would barely notice the new taxes.",
+      "created_at": "2018-09-28T02:51:18Z",
+      "user": {
+        "id": 866286,
+        "username": "Lutar",
+        "name": "John",
+        "avatar_url": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+        "join_date": "2016-10-25",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 44,
+        "following": 9,
+        "ideas": 3630,
+        "watchlist_stocks_count": 22,
+        "like_count": 2730
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253971
+        }
+      ],
+      "likes": {
+        "total": 1,
+        "user_ids": [ 480014 ]
+      },
+      "reshares": {
+        "reshared_count": 1,
+        "user_ids": [ 1217248 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139152933,
+      "body": "$AAPL you think AppleWatch is cool?  Check out LG&#39;s Prada phone &amp; watch set from 2008.  Yes, you made calls with that watch.  LG was first.",
+      "created_at": "2018-09-28T02:48:46Z",
+      "user": {
+        "id": 1436387,
+        "username": "udtrader",
+        "name": "udtrader",
+        "avatar_url": "https://avatars.stocktwits.com/production/1436387/thumb-1520914712.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/1436387/thumb-1520914712.png",
+        "join_date": "2018-03-08",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 400,
+        "following": 2,
+        "ideas": 14350,
+        "watchlist_stocks_count": 63,
+        "like_count": 1256
+      },
+      "source": {
+        "id": 2269,
+        "title": "StockTwits Web",
+        "url": "https://stocktwits.com"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253971
+        }
+      ],
+      "conversation": {
+        "parent_message_id": 139152933,
+        "in_reply_to_message_id": null,
+        "parent": true,
+        "replies": 2
+      },
+      "likes": {
+        "total": 1,
+        "user_ids": [ 158461 ]
+      },
+      "mentioned_users": [],
+      "entities": {
+        "chart": {
+          "thumb": "https://charts.stocktwits.com/production/small_139152933.JPG",
+          "large": "https://charts.stocktwits.com/production/large_139152933.JPG",
+          "original": "https://charts.stocktwits.com/production/original_139152933.JPG",
+          "url": "https://charts.stocktwits.com/production/original_139152933.JPG"
+        },
+        "sentiment": null
+      }
+    },
+    {
+      "id": 139152746,
+      "body": "$AAPL Watch for pullback in correlation to $SPY",
+      "created_at": "2018-09-28T02:45:52Z",
+      "user": {
+        "id": 1352437,
+        "username": "LehmanCapital",
+        "name": "Zackary",
+        "avatar_url": "https://avatars.stocktwits.com/production/1352437/thumb-1519295499.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/1352437/thumb-1519295499.png",
+        "join_date": "2018-01-05",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 41,
+        "following": 0,
+        "ideas": 1113,
+        "watchlist_stocks_count": 64,
+        "like_count": 909
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253973
+        },
+        {
+          "id": 7271,
+          "symbol": "SPY",
+          "title": "SPDR S&P 500",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 97837
+        }
+      ],
+      "likes": {
+        "total": 1,
+        "user_ids": [ 1500729 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139152730,
+      "body": "$AAPL etf selling of appl starts next week. 1.14T company has one way down!",
+      "created_at": "2018-09-28T02:45:39Z",
+      "user": {
+        "id": 1596158,
+        "username": "applbear",
+        "name": "applbear",
+        "avatar_url": "http://avatars.stocktwits.com/images/default_avatar_thumb.jpg",
+        "avatar_url_ssl": "https://s3.amazonaws.com/st-avatars/images/default_avatar_thumb.jpg",
+        "join_date": "2018-08-31",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 1,
+        "following": 0,
+        "ideas": 81,
+        "watchlist_stocks_count": 3,
+        "like_count": 2
+      },
+      "source": {
+        "id": 2269,
+        "title": "StockTwits Web",
+        "url": "https://stocktwits.com"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253970
+        }
+      ],
+      "mentioned_users": [],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139152418,
+      "body": "$SQ Let&#39;s see if this new Square Hyperwave Phase 4 holds.  It slopes to $145 by EOY. #FAANGS #Hyperwave $FB $AAPL $AMZN $NFLX $GOOGL $SQ",
+      "created_at": "2018-09-28T02:40:34Z",
+      "user": {
+        "id": 1600893,
+        "username": "Jared__Vennett",
+        "name": "Jared Vennett",
+        "avatar_url": "https://avatars.stocktwits.com/production/1600893/thumb-1536244949.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/1600893/thumb-1536244949.png",
+        "join_date": "2018-09-06",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 15,
+        "following": 67,
+        "ideas": 22,
+        "watchlist_stocks_count": 2,
+        "like_count": 158
+      },
+      "source": {
+        "id": 2269,
+        "title": "StockTwits Web",
+        "url": "https://stocktwits.com"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253971
+        },
+        {
+          "id": 864,
+          "symbol": "AMZN",
+          "title": "Amazon.com Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 168869
+        },
+        {
+          "id": 2839,
+          "symbol": "NFLX",
+          "title": "Netflix, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 146763
+        },
+        {
+          "id": 7871,
+          "symbol": "FB",
+          "title": "Facebook",
+          "aliases": [ "FBOOK" ],
+          "is_following": false,
+          "watchlist_count": 184292
+        },
+        {
+          "id": 7991,
+          "symbol": "SQ",
+          "title": "Square",
+          "aliases": [ "SQUARE" ],
+          "is_following": false,
+          "watchlist_count": 54373
+        },
+        {
+          "id": 11938,
+          "symbol": "GOOGL",
+          "title": "Alphabet Inc. Class A",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 54195
+        }
+      ],
+      "conversation": {
+        "parent_message_id": 139152418,
+        "in_reply_to_message_id": null,
+        "parent": true,
+        "replies": 1
+      },
+      "likes": {
+        "total": 7,
+        "user_ids": [ 768840, 1096809, 1338428, 1280778, 1234716, 1442008, 1616191 ]
+      },
+      "mentioned_users": [],
+      "entities": {
+        "chart": {
+          "thumb": "https://charts.stocktwits.com/production/small_139152418.png",
+          "large": "https://charts.stocktwits.com/production/large_139152418.png",
+          "original": "https://charts.stocktwits.com/production/original_139152418.png",
+          "url": "https://charts.stocktwits.com/production/original_139152418.png"
+        },
+        "sentiment": { "basic": "Bullish" }
+      }
+    },
+    {
+      "id": 139152297,
+      "body": "$AAPL $AMD $NVDA \nTrump&#39;s tariffs on Chinese goods to affect some AMD and Nvidia gaming graphics cards https://www.cnbc.com/2018/09/27/trumps-tariffs-on-chinese-goods-to-hit-amd-nvidia-gaming-graphics-cards.html",
+      "created_at": "2018-09-28T02:38:28Z",
+      "user": {
+        "id": 866286,
+        "username": "Lutar",
+        "name": "John",
+        "avatar_url": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+        "join_date": "2016-10-25",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 44,
+        "following": 9,
+        "ideas": 3630,
+        "watchlist_stocks_count": 22,
+        "like_count": 2730
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253972
+        },
+        {
+          "id": 2925,
+          "symbol": "NVDA",
+          "title": "NVIDIA Corporation",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 109463
+        },
+        {
+          "id": 4331,
+          "symbol": "AMD",
+          "title": "Advanced Micro Devices, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 143188
+        }
+      ],
+      "conversation": {
+        "parent_message_id": 139152297,
+        "in_reply_to_message_id": null,
+        "parent": true,
+        "replies": 2
+      },
+      "links": [
+        {
+          "title": "Trump's tariffs on Chinese goods to affect some AMD and Nvidia gaming graphics cards",
+          "url": "https://www.cnbc.com/2018/09/27/trumps-tariffs-on-chinese-goods-to-hit-amd-nvidia-gaming-graphics-cards.html",
+          "shortened_url": "https://www.cnbc.com/2018/09/27/trumps-tariffs-on-chinese-goods-to-hit-amd-nvidia-gaming-graphics-cards.html",
+          "shortened_expanded_url": "cnbc.com/2018/09/27/trumps-...",
+          "description": "Neil Godwin | Maximum PC Magazine | Getty Images President Donald Trump's trade war with China may lead to higher PC graphics card prices this holiday. The Trump administration's latest tariffs of 10 percent on $200 billion of imports from China took effect Monday.",
+          "image": "https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2017/06/05/104510864-GettyImages-657222368-AMD.1910x1000.jpg",
+          "created_at": "2018-09-28T02:38:28Z",
+          "video_url": null,
+          "source": {
+            "name": "CNBC",
+            "website": "https://www.cnbc.com"
+          }
+        }
+      ],
+      "likes": {
+        "total": 1,
+        "user_ids": [ 1534361 ]
+      },
+      "reshares": {
+        "reshared_count": 2,
+        "user_ids": [ 1534361, 911299 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139152174,
+      "body": "$AAPL had a good day from one of my big position ( over 500k invested in AAPL )  $SPY $BABA",
+      "created_at": "2018-09-28T02:36:46Z",
+      "user": {
+        "id": 1485329,
+        "username": "wallstreet_gangsta2",
+        "name": "Fan",
+        "avatar_url": "https://avatars.stocktwits.com/production/1485329/thumb-1525313787.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/1485329/thumb-1525313787.png",
+        "join_date": "2018-05-03",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 55,
+        "following": 0,
+        "ideas": 268,
+        "watchlist_stocks_count": 0,
+        "like_count": 14
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253974
+        },
+        {
+          "id": 7271,
+          "symbol": "SPY",
+          "title": "SPDR S&P 500",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 97839
+        },
+        {
+          "id": 12100,
+          "symbol": "BABA",
+          "title": "Alibaba",
+          "aliases": [ "ALIBABA" ],
+          "is_following": false,
+          "watchlist_count": 120721
+        }
+      ],
+      "conversation": {
+        "parent_message_id": 139152174,
+        "in_reply_to_message_id": null,
+        "parent": true,
+        "replies": 3
+      },
+      "likes": {
+        "total": 10,
+        "user_ids": [ 743963, 1054010, 1601763, 987490, 1231080, 1243909, 725845, 1224856, 722015, 1516372 ]
+      },
+      "reshares": {
+        "reshared_count": 1,
+        "user_ids": [ 722015 ]
+      },
+      "mentioned_users": [],
+      "entities": {
+        "chart": {
+          "thumb": "https://charts.stocktwits.com/production/small_139152174.png",
+          "large": "https://charts.stocktwits.com/production/large_139152174.png",
+          "original": "https://charts.stocktwits.com/production/original_139152174.png",
+          "url": "https://charts.stocktwits.com/production/original_139152174.png"
+        },
+        "sentiment": null
+      }
+    },
+    {
+      "id": 139151769,
+      "body": "Bullish flow for today: $AAPL $AMZN $BABA $EA $FB $I $BAC $GM $HLT $WYNN $GOOGL $NDAQ $TTWO $JPM $NTNX $GE $PYPL $RCL $LOW $ABT",
+      "created_at": "2018-09-28T02:31:10Z",
+      "user": {
+        "id": 1333384,
+        "username": "Just_me_samy",
+        "name": "Samy's Options Club",
+        "avatar_url": "https://avatars.stocktwits.com/production/1333384/thumb-1532314772.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/1333384/thumb-1532314772.png",
+        "join_date": "2017-12-24",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 152,
+        "following": 14,
+        "ideas": 569,
+        "watchlist_stocks_count": 105,
+        "like_count": 907
+      },
+      "source": {
+        "id": 2095,
+        "title": "StockTwits For Android ",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253970
+        },
+        {
+          "id": 864,
+          "symbol": "AMZN",
+          "title": "Amazon.com Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 168868
+        },
+        {
+          "id": 1766,
+          "symbol": "EA",
+          "title": "Electronic Arts Inc.",
+          "aliases": [ "ERTS" ],
+          "is_following": false,
+          "watchlist_count": 11946
+        },
+        {
+          "id": 2815,
+          "symbol": "NDAQ",
+          "title": "Nasdaq OMX Group Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 1626
+        },
+        {
+          "id": 3900,
+          "symbol": "TTWO",
+          "title": "Take-Two Interactive Software Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 8995
+        },
+        {
+          "id": 4152,
+          "symbol": "WYNN",
+          "title": "Wynn Resorts Ltd.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 12993
+        },
+        {
+          "id": 4218,
+          "symbol": "ABT",
+          "title": "Abbott Laboratories",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 4062
+        },
+        {
+          "id": 4438,
+          "symbol": "BAC",
+          "title": "Bank of America Corporation",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 65511
+        },
+        {
+          "id": 5481,
+          "symbol": "GE",
+          "title": "General Electric Co.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 59910
+        },
+        {
+          "id": 6020,
+          "symbol": "JPM",
+          "title": "JPMorgan Chase & Co.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 29131
+        },
+        {
+          "id": 6195,
+          "symbol": "LOW",
+          "title": "Lowe's Companies Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 7114
+        },
+        {
+          "id": 6992,
+          "symbol": "RCL",
+          "title": "Royal Caribbean Cruises Ltd.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 1670
+        },
+        {
+          "id": 7871,
+          "symbol": "FB",
+          "title": "Facebook",
+          "aliases": [ "FBOOK" ],
+          "is_following": false,
+          "watchlist_count": 184289
+        },
+        {
+          "id": 9358,
+          "symbol": "GM",
+          "title": "General Motors Company",
+          "aliases": [ "RGM" ],
+          "is_following": false,
+          "watchlist_count": 16123
+        },
+        {
+          "id": 11460,
+          "symbol": "I",
+          "title": "Intelsat",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 3045
+        },
+        {
+          "id": 11693,
+          "symbol": "HLT",
+          "title": "Hilton Worldwide",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 1250
+        },
+        {
+          "id": 11938,
+          "symbol": "GOOGL",
+          "title": "Alphabet Inc. Class A",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 54194
+        },
+        {
+          "id": 12100,
+          "symbol": "BABA",
+          "title": "Alibaba",
+          "aliases": [ "ALIBABA" ],
+          "is_following": false,
+          "watchlist_count": 120723
+        },
+        {
+          "id": 12608,
+          "symbol": "PYPL",
+          "title": "PayPal",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 31614
+        },
+        {
+          "id": 13193,
+          "symbol": "NTNX",
+          "title": "Nutanix",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 11280
+        }
+      ],
+      "conversation": {
+        "parent_message_id": 139151769,
+        "in_reply_to_message_id": null,
+        "parent": true,
+        "replies": 1
+      },
+      "mentioned_users": [],
+      "entities": {
+        "chart": {
+          "thumb": "https://charts.stocktwits.com/production/small_139151769.png",
+          "large": "https://charts.stocktwits.com/production/large_139151769.png",
+          "original": "https://charts.stocktwits.com/production/original_139151769.png",
+          "url": "https://charts.stocktwits.com/production/original_139151769.png"
+        },
+        "sentiment": null
+      }
+    },
+    {
+      "id": 139151665,
+      "body": "$AAPL I never listen to Cramer but even he realised that this Moron POTUS is destroying the US to save himself.",
+      "created_at": "2018-09-28T02:29:42Z",
+      "user": {
+        "id": 866286,
+        "username": "Lutar",
+        "name": "John",
+        "avatar_url": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+        "join_date": "2016-10-25",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 44,
+        "following": 9,
+        "ideas": 3628,
+        "watchlist_stocks_count": 22,
+        "like_count": 2730
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253969
+        }
+      ],
+      "likes": {
+        "total": 2,
+        "user_ids": [ 1396147, 319854 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139151461,
+      "body": "Top Puts for today: $AMD $AMZN $AAPL $WTW $CRI $NFLX $VOD $FB $PCG $SPG $CAR $SPOT $IBB $LRCX $OLED $AMRN $NWSA $JPM $ZG $TTD",
+      "created_at": "2018-09-28T02:26:43Z",
+      "user": {
+        "id": 1333384,
+        "username": "Just_me_samy",
+        "name": "Samy's Options Club",
+        "avatar_url": "https://avatars.stocktwits.com/production/1333384/thumb-1532314772.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/1333384/thumb-1532314772.png",
+        "join_date": "2017-12-24",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 153,
+        "following": 14,
+        "ideas": 570,
+        "watchlist_stocks_count": 105,
+        "like_count": 907
+      },
+      "source": {
+        "id": 2095,
+        "title": "StockTwits For Android ",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253971
+        },
+        {
+          "id": 853,
+          "symbol": "AMRN",
+          "title": "Amarin Corporation plc",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 13018
+        },
+        {
+          "id": 864,
+          "symbol": "AMZN",
+          "title": "Amazon.com Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 168869
+        },
+        {
+          "id": 2213,
+          "symbol": "IBB",
+          "title": "iShares Nasdaq Biotechnology ETF",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 21903
+        },
+        {
+          "id": 2548,
+          "symbol": "LRCX",
+          "title": "Lam Research Corporation",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 8048
+        },
+        {
+          "id": 2839,
+          "symbol": "NFLX",
+          "title": "Netflix, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 146763
+        },
+        {
+          "id": 2938,
+          "symbol": "NWSA",
+          "title": "News Corp.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 325
+        },
+        {
+          "id": 4331,
+          "symbol": "AMD",
+          "title": "Advanced Micro Devices, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 143189
+        },
+        {
+          "id": 4653,
+          "symbol": "CAR",
+          "title": "Avis Budget Group, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 1779
+        },
+        {
+          "id": 4825,
+          "symbol": "CRI",
+          "title": "Carter's, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 286
+        },
+        {
+          "id": 6020,
+          "symbol": "JPM",
+          "title": "JPMorgan Chase & Co.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 29133
+        },
+        {
+          "id": 6694,
+          "symbol": "PCG",
+          "title": "PG & E Corp.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 1578
+        },
+        {
+          "id": 7264,
+          "symbol": "SPG",
+          "title": "Simon Property Group Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 1133
+        },
+        {
+          "id": 7661,
+          "symbol": "VOD",
+          "title": "Vodafone Group plc",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 1838
+        },
+        {
+          "id": 7778,
+          "symbol": "WTW",
+          "title": "Weight Watchers International, Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 9210
+        },
+        {
+          "id": 7871,
+          "symbol": "FB",
+          "title": "Facebook",
+          "aliases": [ "FBOOK" ],
+          "is_following": false,
+          "watchlist_count": 184292
+        },
+        {
+          "id": 9076,
+          "symbol": "SPOT",
+          "title": "Spotify Technology S.A.",
+          "aliases": [ "SPTF", "SPOTIFY" ],
+          "is_following": false,
+          "watchlist_count": 16961
+        },
+        {
+          "id": 11505,
+          "symbol": "OLED",
+          "title": "Universal Display Corp.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 8061
+        },
+        {
+          "id": 12839,
+          "symbol": "ZG",
+          "title": "Zillow Class A",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 1221
+        },
+        {
+          "id": 13168,
+          "symbol": "TTD",
+          "title": "The Trade Desk Inc",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 6367
+        }
+      ],
+      "likes": {
+        "total": 2,
+        "user_ids": [ 1186617, 1374423 ]
+      },
+      "mentioned_users": [],
+      "entities": {
+        "chart": {
+          "thumb": "https://charts.stocktwits.com/production/small_139151461.png",
+          "large": "https://charts.stocktwits.com/production/large_139151461.png",
+          "original": "https://charts.stocktwits.com/production/original_139151461.png",
+          "url": "https://charts.stocktwits.com/production/original_139151461.png"
+        },
+        "sentiment": null
+      }
+    },
+    {
+      "id": 139151424,
+      "body": "$AAPL Closed above 2% today, and people whining and crying because tomorrow is &quot;Friday&quot;.",
+      "created_at": "2018-09-28T02:26:07Z",
+      "user": {
+        "id": 439831,
+        "username": "bebebo",
+        "name": "Ike",
+        "avatar_url": "https://avatars.stocktwits.com/production/439831/thumb-1526651381.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/439831/thumb-1526651381.png",
+        "join_date": "2014-12-21",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 81,
+        "following": 8,
+        "ideas": 14184,
+        "watchlist_stocks_count": 15,
+        "like_count": 3162
+      },
+      "source": {
+        "id": 2269,
+        "title": "StockTwits Web",
+        "url": "https://stocktwits.com"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253970
+        }
+      ],
+      "likes": {
+        "total": 1,
+        "user_ids": [ 1396147 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": null }
+    },
+    {
+      "id": 139151394,
+      "body": "$AAPL Cramer on Trump&#39;s Canada jab: This is no longer the art of the deal, but &#39;the art of destruction&#39; https://www.cnbc.com/2018/09/27/cramer-on-trumps-canada-jab-this-is-now-the-art-of-destruction.html",
+      "created_at": "2018-09-28T02:25:41Z",
+      "user": {
+        "id": 866286,
+        "username": "Lutar",
+        "name": "John",
+        "avatar_url": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+        "avatar_url_ssl": "https://avatars.stocktwits.com/production/866286/thumb-1504340008.png",
+        "join_date": "2016-10-25",
+        "official": false,
+        "identity": "User",
+        "classification": [],
+        "followers": 44,
+        "following": 9,
+        "ideas": 3628,
+        "watchlist_stocks_count": 22,
+        "like_count": 2730
+      },
+      "source": {
+        "id": 1149,
+        "title": "StockTwits for iOS",
+        "url": "http://www.stocktwits.com/mobile"
+      },
+      "symbols": [
+        {
+          "id": 686,
+          "symbol": "AAPL",
+          "title": "Apple Inc.",
+          "aliases": [],
+          "is_following": false,
+          "watchlist_count": 253969
+        }
+      ],
+      "links": [
+        {
+          "title": "Cramer on Trump's Canada jab: This is no longer the art of the deal, but 'the art of destruction'",
+          "url": "https://www.cnbc.com/2018/09/27/cramer-on-trumps-canada-jab-this-is-now-the-art-of-destruction.html",
+          "shortened_url": "https://www.cnbc.com/2018/09/27/cramer-on-trumps-canada-jab-this-is-now-the-art-of-destruction.html",
+          "shortened_expanded_url": "cnbc.com/2018/09/27/cramer-...",
+          "description": "President Donald Trump's claim that he rejected a meeting on trade with Canada struck CNBC's Jim Cramer as surprising given the country's history of allyship with the U.S. \"I'm kind of stunned that President Trump could take on Canada, going totally ad hominem and totally hostile to our nation's largest trading partner,\" the \"Mad Money\" host said on Thursday.",
+          "image": "https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2018/09/04/105432141-1536095234847gettyimages-635097386.1910x1000.jpeg",
+          "created_at": "2018-09-28T02:25:41Z",
+          "video_url": null,
+          "source": {
+            "name": "CNBC",
+            "website": "https://www.cnbc.com"
+          }
+        }
+      ],
+      "likes": {
+        "total": 2,
+        "user_ids": [ 1396147, 319854 ]
+      },
+      "mentioned_users": [],
+      "entities": { "sentiment": null }
+    }
+  ]
+}

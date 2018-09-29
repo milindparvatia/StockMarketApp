@@ -105,14 +105,14 @@
                     low:  pred.low,
                     close: pred.close,
                     
-                    increasing: {line: {color: '#17BECF'}}, 
-                    decreasing: {line: {color: '#7F7F7F'}},
+                    increasing: {line: {color: '#fffe00'}}, 
+                    decreasing: {line: {color: '#000000'}},
                     line: {color: 'rgba(31,119,180,1)'}, 
                     
                     type: 'candlestick', 
                     xaxis: 'x', 
                     yaxis: 'y',
-                    name:'Pridicted'
+                    name:'Predicted'
                     };
 
                 var trace2 = {
@@ -206,40 +206,7 @@
 
                 Plotly.newPlot('myGauge', data, layout);
             }
-            function setChartMACD(){
-                var trace1 = {
-                x: defaultDataMACD.date,
-                y: defaultDataMACD.MACD_Hist,
-                type: 'bar',
-                color: '#00b359',
-                name: 'Histograme'
-                };
-
-                var trace2 = {
-                x: defaultDataMACD.date,
-                y: defaultDataMACD.MACD,
-                type: "scatter",
-                mode: "lines",
-                name: 'MACD'
-                };
-
-                var trace3 = {
-                x: defaultDataMACD.date,
-                y: defaultDataMACD.MACD_Signal,
-                type: "scatter",
-                mode: "lines",
-                name: 'MACD signal'
-                };
-
-                var layout = {
-                title: 'MACD Chart Without Boundary Lines'
-                };
-
-                var data = [trace1,trace2,trace3];
-
-                Plotly.newPlot('myDiv', data, layout);
-            }
-
+            
             function setChart1() {
                 var data = [
                 {
@@ -304,9 +271,13 @@
                 type: 'scatter',
                 name:'line'
             }
-
-
-
+            for(i=0;i<defaultDataEMA1.count;i++)
+            {
+                var indicator=(defaultDataEMA1.EMA[i]-defaultDataEMA2.EMA[i])
+                console.log(defaultDataEMA1.EMA[i])
+                console.log(defaultDataEMA2.EMA[i])
+                console.log(indicator)
+            }
             var data = [trace1,trace2,trace3,trace5];
 
             var layout = {
@@ -352,49 +323,8 @@
             };
 
             Plotly.plot('plotly-div', data, layout);    
+
         }
-
-
-        function setChart3(){
-        var trace1 = {
-        x: defaultData.date, 
-        close: defaultData.close, 
-        decreasing: {line: {color: '#7F7F7F'}}, 
-        high: defaultData.high, 
-        increasing: {line: {color: '#17BECF'}}, 
-        line: {color: 'rgba(31,119,180,1)'}, 
-        low: defaultData.low, 
-        open: defaultData.open,
-        type: 'ohlc', 
-        xaxis: 'x', 
-        yaxis: 'y'
-        };
-
-        var data = [trace1];
-
-        var layout = {
-        dragmode: 'zoom', 
-        margin: {
-            r: 10, 
-            t: 25, 
-            b: 40, 
-            l: 60
-        }, 
-        showlegend: false, 
-        xaxis: {
-            autorange: true, 
-            rangeslider: {range: ['2017-01-17 12:00', '2017-02-10 12:00']}, 
-            title: 'Date', 
-            type: 'date'
-        }, 
-        yaxis: {
-            autorange: true, 
-            type: 'linear'
-        }
-        };
-
-        Plotly.plot('plotly-div', data, layout);
-    }
     {% endblock %}          
 </script>
     
