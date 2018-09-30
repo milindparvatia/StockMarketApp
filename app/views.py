@@ -62,11 +62,11 @@ class TimeSeriesDailyAdjusted(APIView):
         
     def get(self, request, format=None):
         # create a form instance and populate it with data from the request: 
-        dataval = self.request.query_params.get('tvwidgetsymbol')
+        # dataval = self.request.query_params.get('tvwidgetsymbol')
         # dataval = unquote(dataval)
         search_val = open('searchVal.txt','r').read()
         
-        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=NSE:TCS&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
+        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Time Series (Daily)']
         df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
@@ -78,7 +78,7 @@ class TimeSeriesDailyAdjusted(APIView):
                 df.index=df.index+1
         dataDaily=df.sort_values('date')
 
-        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=NSE:TCS&outputsize=compact&apikey=6G6EDTRGV2N1F9SP')
+        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=compact&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Time Series (Daily)']
         df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
@@ -88,7 +88,7 @@ class TimeSeriesDailyAdjusted(APIView):
                 data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['6. volume'])]
                 df.loc[-1,:]=data_row
                 df.index=df.index+1
-        main_df=df.sort_values('date')
+        main_df=df.sort_values('date')        
         main_df['date'] = main_df['date'].dt.strftime('%Y%m%d')
         main_df.set_index("date", inplace=True)
 
@@ -104,10 +104,10 @@ class TimeSeriesDailyAdjusted(APIView):
             for i in range(len(y)-2):
                     y[i]=y[i+1]
             
-            x_train=x[0:80]
-            x_test=x[81:97]
-            y_train=y[0:80]
-            y_test=y[81:97]
+            x_train=x[0:90]
+            x_test=x[91:97]
+            y_train=y[0:90]
+            y_test=y[91:97]
             sc = StandardScaler()
             
             x_train = sc.fit_transform(x_train)
@@ -162,41 +162,41 @@ class TimeSeriesDailyAdjusted(APIView):
         dataEMA2=df.sort_values('date')
 
 
-        os.remove("tweets1234.json")
-        Array = search_val.split(":")
-        value = Array[1]
-        os.system('twitterscraper #'+value+' --limit 50 -bd 2018-09-17 -ed 2018-09-20 --output=tweets1234.json')
-        punctuation = list(string.punctuation)
-        stop = stopwords.words('english') + punctuation + ['rt', 'via']
+        # os.remove("tweets1234.json")
+        # Array = search_val.split(":")
+        # value = Array[1]
+        # os.system('twitterscraper #'+value+' --limit 50 -bd 2018-09-17 -ed 2018-09-20 --output=tweets1234.json')
+        # punctuation = list(string.punctuation)
+        # stop = stopwords.words('english') + punctuation + ['rt', 'via']
         
-        with open('tweets1234.json', 'r') as f:
-            line = f.read() # read only the first tweet/line
-            total = list()
-            sentiment = 0.0
-            pos = 0.0
-            neg = 0.0
-            tweet = json.loads(line) # load it as Python dict
-            type(tweet)
-            for key in tweet:
-                snt = analyser.polarity_scores(key['text'])
-                sentiment = sentiment + snt['compound']
-                pos = pos + snt['pos']
-                neg = neg + snt['neg']
-                terms_stop = [term for term in word_tokenize(key['text']) if term not in stop] #Using Nltk to tokenize
-                total.extend(terms_stop)
+        # with open('tweets1234.json', 'r') as f:
+        #     line = f.read() # read only the first tweet/line
+        #     total = list()
+        #     sentiment = 0.0
+        #     pos = 0.0
+        #     neg = 0.0
+        #     tweet = json.loads(line) # load it as Python dict
+        #     type(tweet)
+        #     for key in tweet:
+        #         snt = analyser.polarity_scores(key['text'])
+        #         sentiment = sentiment + snt['compound']
+        #         pos = pos + snt['pos']
+        #         neg = neg + snt['neg']
+        #         terms_stop = [term for term in word_tokenize(key['text']) if term not in stop] #Using Nltk to tokenize
+        #         total.extend(terms_stop)
         
-        for key in total:
-            if(len(key) < 3):
-                total.remove(key)
+        # for key in total:
+        #     if(len(key) < 3):
+        #         total.remove(key)
 
-        for i in range(len(total)):
-            total[i] = total[i].lower()
-        f.close()
+        # for i in range(len(total)):
+        #     total[i] = total[i].lower()
+        # f.close()
 
         
-        sentiment=str(sentiment)
-        str(neg)
-        str(pos)
+        # sentiment=str(sentiment)
+        # str(neg)
+        # str(pos)
 
         predict = yplotDF
         original = ytestDF
@@ -209,7 +209,7 @@ class TimeSeriesDailyAdjusted(APIView):
             "defaultEMA1":defaultEMA1,
             "predict":predict,
             "original":original,
-            "sentiment": sentiment,
+            # "sentiment": sentiment,
         }
         return Response(alldata)
 
