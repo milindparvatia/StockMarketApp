@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
-from django.views.generic import View
+from rest_framework import generics
+from django.views.generic import View   
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -29,6 +30,23 @@ from collections import defaultdict
 import re
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 analyser = SentimentIntensityAnalyzer()
+
+
+from rest_framework import viewsets
+from app.serializers import CompanyListSerializer
+import django_filters.rest_framework
+from rest_framework import generics,filters
+from django_filters.rest_framework import DjangoFilterBackend
+from app.models import CompanyList
+
+
+class CompanyListView(APIView):
+    def get(self, request):
+        queryset = CompanyList.objects.all()
+        serializer_class = CompanyListSerializer(queryset, many=True)
+        #return the serialize JSON data
+        return Response(serializer_class.data)
+
 
 def get_name(request):
     # if this is a POST request we need to process the form data
@@ -78,17 +96,17 @@ class TimeSeriesDailyAdjusted(APIView):
                 df.index=df.index+1
         dataDaily=df.sort_values('date')
 
-        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=compact&apikey=6G6EDTRGV2N1F9SP')
+        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol='+search_val+'&outputsize=compact&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Time Series (Daily)']
         df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
         for d,p in data.items():
             if float(p['3. low'])!=0:
                 date=datetime.datetime.strptime(d,'%Y-%m-%d')
-                data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['6. volume'])]
+                data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['5. volume'])]
                 df.loc[-1,:]=data_row
                 df.index=df.index+1
-        main_df=df.sort_values('date')        
+        main_df=df.sort_values('date')      
         main_df['date'] = main_df['date'].dt.strftime('%Y%m%d')
         main_df.set_index("date", inplace=True)
 
@@ -101,13 +119,13 @@ class TimeSeriesDailyAdjusted(APIView):
             tt=scaler.transform(x1)
             x=pd.DataFrame(data=tt)
             
-            for i in range(len(y)-2):
-                    y[i]=y[i+1]
+            
             
             x_train=x[0:90]
-            x_test=x[91:97]
+            x_test=x[91:99]
             y_train=y[0:90]
-            y_test=y[91:97]
+            y_test=y[91:99]
+
             sc = StandardScaler()
             
             x_train = sc.fit_transform(x_train)

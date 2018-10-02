@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<div class="container body-content">    
+  
 <br>
 <h1 class="display-4 text-center">{{val}}</h1>
 
@@ -17,7 +17,7 @@
 
         <div id="myGauge"></div>
         <br><br>
-
+<div class="container body-content">  
 
     <!-- {% for tweet in jsonval %}
     <li>{{tweet.text}}</li>
@@ -139,7 +139,7 @@
 
                 var data = [trace1,trace2];
 
-                Plotly.newPlot('graph', data, layout);
+                Plotly.newPlot('graph', data, layout, {responsive: true});
             }
 
             function setGauge(){
@@ -204,7 +204,7 @@
                             showgrid: false, range: [-1, 1]}
                 };
 
-                Plotly.newPlot('myGauge', data, layout);
+                Plotly.newPlot('myGauge', data, layout, {responsive: true});
             }
             
             function setChart1() {
@@ -322,7 +322,7 @@
             }
             };
 
-            Plotly.plot('plotly-div', data, layout);    
+            Plotly.plot('plotly-div', data, layout, {responsive: true});    
 
         }
     {% endblock %}          
