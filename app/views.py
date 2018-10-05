@@ -30,8 +30,6 @@ from collections import defaultdict
 import re
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 analyser = SentimentIntensityAnalyzer()
-
-
 from rest_framework import viewsets
 from app.serializers import CompanyListSerializer
 import django_filters.rest_framework
@@ -96,18 +94,18 @@ class TimeSeriesDailyAdjusted(APIView):
                 df.index=df.index+1
         dataDaily=df.sort_values('date')
 
-        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol='+search_val+'&outputsize=compact&apikey=6G6EDTRGV2N1F9SP')
+        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=compact&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Time Series (Daily)']
         df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
         for d,p in data.items():
             if float(p['3. low'])!=0:
                 date=datetime.datetime.strptime(d,'%Y-%m-%d')
-                data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['5. volume'])]
+                data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['6. volume'])]
                 df.loc[-1,:]=data_row
                 df.index=df.index+1
         main_df=df.sort_values('date')      
-        main_df['date'] = main_df['date'].dt.strftime('%Y%m%d')
+        # main_df['date'] = main_df['date'].dt.strftime('%Y%m%d')
         main_df.set_index("date", inplace=True)
 
         x,y=[],[]
@@ -119,12 +117,15 @@ class TimeSeriesDailyAdjusted(APIView):
             tt=scaler.transform(x1)
             x=pd.DataFrame(data=tt)
             
+            for i in range(len(y)-1):
+                y[i]=y[i+1]
             
-            
-            x_train=x[0:90]
-            x_test=x[91:99]
+            y=y.shift(1, freq='D')
+
+            x_train=x[0:90]  
+            x_test=x[90:100]
             y_train=y[0:90]
-            y_test=y[91:99]
+            y_test=y[90:100]
 
             sc = StandardScaler()
             
@@ -149,8 +150,8 @@ class TimeSeriesDailyAdjusted(APIView):
             yplotDF[i] = pd.Series(y_pred)
             ytestDF[i] = pd.Series(y_orig)
         
-        ytestDF['date'] = pd.to_datetime(ytestDF.index, format='%Y%m%d')
-        yplotDF['date'] = pd.to_datetime(ytestDF.index, format='%Y%m%d')
+        ytestDF['date'] = pd.to_datetime(ytestDF.index)
+        yplotDF['date'] = pd.to_datetime(ytestDF.index)
         
 
         yplotDF.columns = ['open','high','low','close','volume','date']
@@ -180,41 +181,41 @@ class TimeSeriesDailyAdjusted(APIView):
         dataEMA2=df.sort_values('date')
 
 
-        # os.remove("tweets1234.json")
-        # Array = search_val.split(":")
-        # value = Array[1]
-        # os.system('twitterscraper #'+value+' --limit 50 -bd 2018-09-17 -ed 2018-09-20 --output=tweets1234.json')
-        # punctuation = list(string.punctuation)
-        # stop = stopwords.words('english') + punctuation + ['rt', 'via']
+        os.remove("tweets1234.json")
+        Array = search_val.split(":")
+        value = Array[1]
+        os.system('twitterscraper #'+value+' --limit 50 -bd 2018-09-17 -ed 2018-09-20 --output=tweets1234.json')
+        punctuation = list(string.punctuation)
+        stop = stopwords.words('english') + punctuation + ['rt', 'via']
         
-        # with open('tweets1234.json', 'r') as f:
-        #     line = f.read() # read only the first tweet/line
-        #     total = list()
-        #     sentiment = 0.0
-        #     pos = 0.0
-        #     neg = 0.0
-        #     tweet = json.loads(line) # load it as Python dict
-        #     type(tweet)
-        #     for key in tweet:
-        #         snt = analyser.polarity_scores(key['text'])
-        #         sentiment = sentiment + snt['compound']
-        #         pos = pos + snt['pos']
-        #         neg = neg + snt['neg']
-        #         terms_stop = [term for term in word_tokenize(key['text']) if term not in stop] #Using Nltk to tokenize
-        #         total.extend(terms_stop)
+        with open('tweets1234.json', 'r') as f:
+            line = f.read() # read only the first tweet/line
+            total = list()
+            sentiment = 0.0
+            pos = 0.0
+            neg = 0.0
+            tweet = json.loads(line) # load it as Python dict
+            type(tweet)
+            for key in tweet:
+                snt = analyser.polarity_scores(key['text'])
+                sentiment = sentiment + snt['compound']
+                pos = pos + snt['pos']
+                neg = neg + snt['neg']
+                terms_stop = [term for term in word_tokenize(key['text']) if term not in stop] #Using Nltk to tokenize
+                total.extend(terms_stop)
         
-        # for key in total:
-        #     if(len(key) < 3):
-        #         total.remove(key)
+        for key in total:
+            if(len(key) < 3):
+                total.remove(key)
 
-        # for i in range(len(total)):
-        #     total[i] = total[i].lower()
-        # f.close()
+        for i in range(len(total)):
+            total[i] = total[i].lower()
+        f.close()
 
         
-        # sentiment=str(sentiment)
-        # str(neg)
-        # str(pos)
+        sentiment=str(sentiment)
+        str(neg)
+        str(pos)
 
         predict = yplotDF
         original = ytestDF
