@@ -79,12 +79,12 @@
                     defaultData = alldata.defaultDaily
                     defaultDataEMA1 = alldata.defaultEMA1                
                     defaultDataEMA2 = alldata.defaultEMA2   
-                    //sentiment = alldata.sentiment   
+                    sentiment = alldata.sentiment   
                     pred = alldata.predict
                     orig = alldata.original        
                     setChart1()
                     setChart2()
-                    //setGauge()
+                    setGauge()
                     set_prid_orig()
                     //setChart3()
                     //setChartMACD()
@@ -144,7 +144,7 @@
 
             function setGauge(){
                 // Enter a speed between 0 and 180
-                var level = (sentiment)*9;
+                var level = (sentiment)*360;
 
                 // Trig to calc meter point
                 var degrees = 180 - level,

@@ -104,7 +104,7 @@ class TimeSeriesDailyAdjusted(APIView):
                 data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['6. volume'])]
                 df.loc[-1,:]=data_row
                 df.index=df.index+1
-        main_df=df.sort_values('date')      
+        main_df=df.sort_values('date')  
         # main_df['date'] = main_df['date'].dt.strftime('%Y%m%d')
         main_df.set_index("date", inplace=True)
 
@@ -152,8 +152,9 @@ class TimeSeriesDailyAdjusted(APIView):
         
         ytestDF['date'] = pd.to_datetime(ytestDF.index)
         yplotDF['date'] = pd.to_datetime(ytestDF.index)
-        
 
+        ytestDF=ytestDF.drop(ytestDF.index[[len(ytestDF)-1]])
+        
         yplotDF.columns = ['open','high','low','close','volume','date']
         ytestDF.columns = ['open','high','low','close','volume','date']
         
@@ -181,42 +182,110 @@ class TimeSeriesDailyAdjusted(APIView):
         dataEMA2=df.sort_values('date')
 
 
-        os.remove("tweets1234.json")
-        Array = search_val.split(":")
-        value = Array[1]
-        os.system('twitterscraper #'+value+' --limit 50 -bd 2018-09-17 -ed 2018-09-20 --output=tweets1234.json')
-        punctuation = list(string.punctuation)
-        stop = stopwords.words('english') + punctuation + ['rt', 'via']
+        # os.remove("tweets1234.json")
+        # Array = search_val.split(":")
+        # value = Array[1]
+        # os.system('twitterscraper #'+value+' --limit 50 -bd 2018-09-17 -ed 2018-09-20 --output=tweets1234.json')
+        # punctuation = list(string.punctuation)
+        # stop = stopwords.words('english') + punctuation + ['rt', 'via']
         
-        with open('tweets1234.json', 'r') as f:
-            line = f.read() # read only the first tweet/line
-            total = list()
+        # with open('tweets1234.json', 'r') as f:
+        #     line = f.read() # read only the first tweet/line
+        #     total = list()
+        #     sentiment = 0.0
+        #     pos = 0.0
+        #     neg = 0.0
+        #     tweet = json.loads(line) # load it as Python dict
+        #     type(tweet)
+        #     for key in tweet:
+        #         snt = analyser.polarity_scores(key['text'])
+        #         sentiment = sentiment + snt['compound']
+        #         pos = pos + snt['pos']
+        #         neg = neg + snt['neg']
+        #         terms_stop = [term for term in word_tokenize(key['text']) if term not in stop] #Using Nltk to tokenize
+        #         total.extend(terms_stop)
+        
+        # for key in total:
+        #     if(len(key) < 3):
+        #         total.remove(key)
+
+        # for i in range(len(total)):
+        #     total[i] = total[i].lower()
+        # f.close()
+
+        
+        # sentiment=str(sentiment)
+        # str(neg)
+        # str(pos)
+
+        def leaders(xs, top=20):
+            counts = defaultdict(int)
+            for x in xs:
+                counts[x] += 1
+            return sorted(counts.items(), reverse=True, key=lambda tup: tup[1])[:top]
+
+        response = requests.get("https://api.stocktwits.com/api/2/streams/symbol/GOOG.json")
+
+        dat = response.json()
+
+        with open("data5.json","w") as outfile:
+            json.dump(dat,outfile)
+            
+        with open('data5.json', 'r') as f:
+            line = f.read()  # read only the first tweet/line
+            
+            tweet = json.loads(line) # load it as Python dict
+            print(type(tweet))
+            msg = tweet['messages']
+            print(type(msg))
+            #loop in through msg by indexes to get all messages
+            #message[body] will give you tweet text
+            message = msg[0]
+            print(type(message))
+            ent = message['entities']
+            print(type(ent))
+            sentiment = ent['sentiment']
+            print(type(sentiment))
+            bulltotal = list()
+            beartotal = list()
+            neutraltotal = list()
             sentiment = 0.0
             pos = 0.0
             neg = 0.0
-            tweet = json.loads(line) # load it as Python dict
-            type(tweet)
-            for key in tweet:
-                snt = analyser.polarity_scores(key['text'])
+            count = 0
+
+            punctuation = list(string.punctuation)
+            stop = stopwords.words('english') + punctuation + ['rt', 'via']
+            
+            for tweets in msg:
+                text = tweets['body']  #Actual message
+                count = count + 1
+                #Analyser
+                snt = analyser.polarity_scores(text)
                 sentiment = sentiment + snt['compound']
                 pos = pos + snt['pos']
                 neg = neg + snt['neg']
-                terms_stop = [term for term in word_tokenize(key['text']) if term not in stop] #Using Nltk to tokenize
-                total.extend(terms_stop)
-        
-        for key in total:
-            if(len(key) < 3):
-                total.remove(key)
+                entity = tweets['entities']
+                sentiments = entity['sentiment']
+                #print(text)
 
-        for i in range(len(total)):
-            total[i] = total[i].lower()
+                if(bool(sentiments)):
+                    if(sentiments['basic'] == 'Bullish'):
+                        terms_stop = [term for term in word_tokenize(text) if term not in stop]  # Using Nltk to tokenize
+                        bulltotal.extend(terms_stop)
+                    else:
+                        terms_stop = [term for term in word_tokenize(text) if term not in stop]  # Using Nltk to tokenize
+                        beartotal.extend(terms_stop)
+                else:
+                    terms_stop = [term for term in word_tokenize(text) if term not in stop]  # Using Nltk to tokenize
+                    neutraltotal.extend(terms_stop)        
         f.close()
-
         
-        sentiment=str(sentiment)
-        str(neg)
-        str(pos)
+        # freq1 = leaders(bulltotal)
+        # freq2 = leaders(beartotal)
+        # freq3 = leaders(neutraltotal)
 
+        sentimentData = sentiment/count
         predict = yplotDF
         original = ytestDF
         defaultEMA1 = dataEMA1
@@ -228,7 +297,7 @@ class TimeSeriesDailyAdjusted(APIView):
             "defaultEMA1":defaultEMA1,
             "predict":predict,
             "original":original,
-            # "sentiment": sentiment,
+            "sentiment": sentimentData,
         }
         return Response(alldata)
 

@@ -5,6 +5,11 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import string
 from collections import defaultdict
+import re
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+
+analyser = SentimentIntensityAnalyzer()
 
 def leaders(xs, top=20):
     counts = defaultdict(int)
@@ -14,7 +19,7 @@ def leaders(xs, top=20):
 
 
 if __name__ == '__main__':
-    with open('data4.json', 'r') as f:
+    with open('data1.json', 'r') as f:
         line = f.read()  # read only the first tweet/line
         total = list()
         tweet = json.loads(line) # load it as Python dict
@@ -43,12 +48,26 @@ if __name__ == '__main__':
         bulltotal = list()
         beartotal = list()
         neutraltotal = list()
+        sentiment = 0.0
+        pos = 0.0
+        neg = 0.0
+        count = 0
 
         punctuation = list(string.punctuation)
         stop = stopwords.words('english') + punctuation + ['rt', 'via']
         
         for tweets in msg:
-            text = tweets['body']
+            text = tweets['body']  #Actual message
+            count = count + 1
+
+
+            #Analyser
+            snt = analyser.polarity_scores(text)
+            sentiment = sentiment + snt['compound']
+            pos = pos + snt['pos']
+            neg = neg + snt['neg']
+            
+            
             entity = tweets['entities']
             sentiments = entity['sentiment']
             #print(text)
@@ -86,3 +105,6 @@ if __name__ == '__main__':
     print("\n\n")
     print(freq3)
     print("\n\n")
+    print("\n Sentiment Index Compound : " + str(sentiment/count))
+    print("\n Sentiment Index Negative : " + str(neg/count))
+    print("\n Sentiment Index Positive: " + str(pos/count))
