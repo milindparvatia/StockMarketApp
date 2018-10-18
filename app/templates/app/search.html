@@ -82,12 +82,9 @@
                     sentiment = alldata.sentiment   
                     pred = alldata.predict
                     orig = alldata.original        
-                    setChart1()
-                    setChart2()
+                    setCharts()
                     setGauge()
                     set_prid_orig()
-                    //setChart3()
-                    //setChartMACD()
                     $("#progress").hide()
                 },
                 error: function(error_data){
@@ -207,20 +204,8 @@
                 Plotly.newPlot('myGauge', data, layout, {responsive: true});
             }
             
-            function setChart1() {
-                var data = [
-                {
-                    x: defaultData.date,
-                    y: defaultData.close,
-                    type: 'scatter',
-                    name:'line'
-                }
-                ];
-
-                Plotly.newPlot('plotly-div', data);
-            }
             
-            function setChart2(){
+            function setCharts(){
             var trace1 = {
             x: defaultData.date, 
             close: defaultData.close, 
@@ -258,27 +243,12 @@
 
             };
             var trace4 = {
-                x:defaultData.date,
-                marker:{color: '#7F7F7F'},
-                name:'Volume',
-                type:'bar',
-                yaxis:'y',
-                volume:defaultData.volume
-            };
-            var trace5 = {
                 x: defaultData.date,
                 y: defaultData.close,
                 type: 'scatter',
                 name:'line'
             }
-            for(i=0;i<defaultDataEMA1.count;i++)
-            {
-                var indicator=(defaultDataEMA1.EMA[i]-defaultDataEMA2.EMA[i])
-                console.log(defaultDataEMA1.EMA[i])
-                console.log(defaultDataEMA2.EMA[i])
-                console.log(indicator)
-            }
-            var data = [trace1,trace2,trace3,trace5];
+            var data = [trace1,trace2,trace3,trace4];
 
             var layout = {
             dragmode: 'zoom', 
@@ -290,35 +260,42 @@
             }, 
             showlegend: false, 
             xaxis: {
-                // autorange: false, 
-                domain: [0, 1], 
-                range: ['2016-01-03', '2017-02-15'],
-                rangeselector: {buttons: [
-                {
-                    count: 1,
-                    label: '1m',
-                    step: 'month',
-                    stepmode: 'backward'
+                // autorange: false,
+                rangeselector: {
+                    buttons: [{
+                        step: 'month',
+                        stepmode: 'backward',
+                        count: 1,
+                        label: '1m'
+                    }, {
+                        step: 'month',
+                        stepmode: 'backward',
+                        count: 6,
+                        label: '6m'
+                    }, {
+                        step: 'year',
+                        stepmode: 'todate',
+                        count: 1,
+                        label: 'YTD'
+                    }, {
+                        step: 'year',
+                        stepmode: 'backward',
+                        count: 1,
+                        label: '1y'
+                    }, {
+                        step: 'all',
+                    }],
                 },
-                {
-                    count: 6,
-                    label: '6m',
-                    step: 'month',
-                    stepmode: 'backward'
-                },
-                {step: 'all'}
-                ]},
-                rangeslider:{range:['2016-01-03','2017-05-04']},
+                rangeslider:{range:['2018-01-03','2018-10-18']},
         
                 title: 'Date', 
                 type: 'date'
             }, 
             yaxis: {
                 //autorange: false, 
-                domain: [0, 1], 
-                range: [1000, 1800], 
+                position:0,
                 type: 'linear',
-                rangeslider:{range:['1000','1800']}
+                rangeslider:{}
             }
             };
 

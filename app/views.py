@@ -37,13 +37,20 @@ from rest_framework import generics,filters
 from django_filters.rest_framework import DjangoFilterBackend
 from app.models import CompanyList
 
+class CompanyData(viewsets.ModelViewSet):
+    authentication_classes = []
+    permission_classes = []
+    
+    queryset = CompanyList.objects.all()
+    serializer_class = CompanyListSerializer
 
 class CompanyListView(APIView):
     def get(self, request):
         queryset = CompanyList.objects.all()
         serializer_class = CompanyListSerializer(queryset, many=True)
         #return the serialize JSON data
-        return Response(serializer_class.data)
+        data = serializer_class.data
+        return Response(data)
 
 
 def get_name(request):

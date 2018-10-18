@@ -1,9 +1,15 @@
 from django.urls import path,include
 from . import views
 from django.contrib.auth import views as auth_views
-from .views import TimeSeriesDailyAdjusted,CompanyListView
+from .views import TimeSeriesDailyAdjusted,CompanyListView,CompanyData
+from django.conf.urls import url,include
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'users', views.CompanyData)
 
 urlpatterns = [
+    url(r'^filterData/', include(router.urls)),
     path('', views.index, name='index'),
     path('register/', views.register, name='register'),
     path(
@@ -16,4 +22,8 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('api/chart/data/', TimeSeriesDailyAdjusted.as_view()),
     path('api/filter/', CompanyListView.as_view()),
+]
+
+urlpatterns += [
+    path('api-auth/', include('rest_framework.urls')),
 ]
