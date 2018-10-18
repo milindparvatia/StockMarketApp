@@ -6,7 +6,7 @@ from django.conf.urls import url,include
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'users', views.CompanyData)
+router.register(r'data', views.CompanyData)
 
 urlpatterns = [
     url(r'^filterData/', include(router.urls)),
