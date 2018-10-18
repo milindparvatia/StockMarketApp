@@ -115,6 +115,32 @@
                 </div>
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
+            <script>
+                var endpoint1 = '/api/filter/'
+                var DataFilter = [];
+                
+                  $.ajax({
+                              method: "GET",
+                              url: endpoint1,
+                          success: function(DATAFilter){
+                              
+                              DataFilter = DATAFilter.company_name
+                              console.log(DataFilter)
+                              setfilter(DataFilter)
+                          },
+                          error: function(error_data){
+                              console.log("filter error")
+                              console.log(error_data)
+                          }
+                      });
+
+                  function setfilter() {
+                    var availableTags = DataFilter;
+                    $( "#result" ).autocomplete({
+                      source: availableTags
+                    });
+                  } 
+                </script>
             <ul class="navbar-nav mr- ">
                   {% if user.is_authenticated %}
                   <li class="nav-item dropdown">
@@ -145,30 +171,7 @@
     </div>
     <script>
         $(document).ready(function(){
-          {% block jquery %}
-          var endpoint1 = '/api/filter/'
-          var DataFilter = [];
-  
-              $.ajax({
-                          method: "GET",
-                          url: endpoint1,
-                      success: function(data){
-                          DataFilter = data
-                          setfilter(DataFilter)
-                      },
-                      error: function(error_data){
-                          console.log("error")
-                          console.log(error_data)
-                      }
-                  });
-
-              function setfilter() {
-                var availableTags = [DataFilter[0].company_name]
-                $( "#result" ).autocomplete({
-                  source: availableTags
-                });
-              } 
-          {% endblock %}
+          {% block jquery %}{% endblock %}
         })
     </script>
 </body>

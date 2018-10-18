@@ -36,11 +36,14 @@ import django_filters.rest_framework
 from rest_framework import generics,filters
 from django_filters.rest_framework import DjangoFilterBackend
 from app.models import CompanyList
+import io
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 
 class CompanyData(viewsets.ModelViewSet):
     authentication_classes = []
     permission_classes = []
-    
+
     queryset = CompanyList.objects.all()
     serializer_class = CompanyListSerializer
 
@@ -50,7 +53,17 @@ class CompanyListView(APIView):
         serializer_class = CompanyListSerializer(queryset, many=True)
         #return the serialize JSON data
         data = serializer_class.data
-        return Response(data)
+        content = JSONRenderer().render(data)
+        stream = io.BytesIO(content)
+        data = JSONParser().parse(stream)
+
+        dfilter = pd.DataFrame(data)
+        dfilter = dfilter['company_name'].values.tolist()
+        
+        DATAFilter = {
+            "company_name": dfilter,
+            }
+        return Response(DATAFilter)
 
 
 def get_name(request):
@@ -63,13 +76,8 @@ def get_name(request):
         Array = valArray.split(":")
         value = Array[1]
         val = valArray
-
-        with open('searchVal.txt','w+') as f:
-            #convert to string:
-            f.seek(0)
-            f.write(val)
-            f.truncate()
-            f.close()
+        request.session['search_val'] = valArray
+        
         # redirect to a new URL:
         response = requests.get('https://newsapi.org/v2/everything?q="'+value+'"&apiKey=4df8d4c46e5f41bca7e6e1331b63ad7d')
         geodata = response.json()
@@ -84,11 +92,7 @@ class TimeSeriesDailyAdjusted(APIView):
     permission_classes = []
         
     def get(self, request, format=None):
-        # create a form instance and populate it with data from the request: 
-        # dataval = self.request.query_params.get('tvwidgetsymbol')
-        # dataval = unquote(dataval)
-        search_val = open('searchVal.txt','r').read()
-        
+        search_val = request.session.get('search_val')
         data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Time Series (Daily)']
