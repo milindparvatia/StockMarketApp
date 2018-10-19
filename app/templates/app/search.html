@@ -86,6 +86,7 @@
                     setGauge()
                     set_prid_orig()
                     $("#progress").hide()
+                    //setchartupdate()
                 },
                 error: function(error_data){
                     console.log("error")
@@ -249,9 +250,33 @@
                 name:'line'
             }
             var data = [trace1,trace2,trace3,trace4];
-
+            
             var layout = {
-            dragmode: 'zoom', 
+            dragmode: 'zoom',
+            annotations: [
+                {
+                x: defaultData.date[80,45],
+                y: defaultData.close[80,45],
+                xref: 'x',
+                yref: 'y',
+                text: 'Buy',
+                showarrow: true,
+                arrowhead: 7,
+                ax: 0,
+                ay: -40
+                },
+                {
+                x: defaultData.date[70,90],
+                y: defaultData.close[70,90],
+                xref: 'x',
+                yref: 'y',
+                text: 'Sell',
+                showarrow: true,
+                arrowhead: 7,
+                ax: 0,
+                ay: -40
+                }
+            ], 
             margin: {
                 r: 10, 
                 t: 25, 
@@ -290,7 +315,6 @@
             };
 
             Plotly.plot('plotly-div', data, layout, {responsive: true});    
-            
         }
     {% endblock %}          
 </script>
