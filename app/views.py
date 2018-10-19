@@ -28,6 +28,7 @@ from app.serializers import CompanyListSerializer
 from app.models import CompanyList
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
+from rest_framework.permissions import IsAdminUser
 
 class CompanyData(viewsets.ModelViewSet):
     authentication_classes = []
@@ -166,7 +167,7 @@ class TimeSeriesDailyAdjusted(APIView):
             data_row=[date,float(p['EMA'])]
             df.loc[-1,:]=data_row
             df.index=df.index+1
-        dfEMA1=df.head(99)
+        dfEMA1=df.head(100)
         dataEMA1=dfEMA1.sort_values('date')
 
 
@@ -179,7 +180,7 @@ class TimeSeriesDailyAdjusted(APIView):
             data_row=[date,float(p['EMA'])]
             df.loc[-1,:]=data_row
             df.index=df.index+1
-        dfEMA2=df.head(99)
+        dfEMA2=df.head(100)
         dataEMA2=dfEMA2.sort_values('date')
 
 
