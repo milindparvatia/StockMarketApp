@@ -93,7 +93,7 @@ class TimeSeriesDailyAdjusted(APIView):
         
     def get(self, request, format=None):
         search_val = request.session.get('search_val')
-        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=full&apikey=6G6EDTRGV2N1F9SP')
+        data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=compact&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Time Series (Daily)']
         df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
@@ -169,7 +169,7 @@ class TimeSeriesDailyAdjusted(APIView):
         yplotDF.columns = ['open','high','low','close','volume','date']
         ytestDF.columns = ['open','high','low','close','volume','date']
         
-        data=requests.get('https://www.alphavantage.co/query?function=EMA&symbol='+search_val+'&interval=weekly&time_period=9&series_type=open&apikey=6G6EDTRGV2N1F9SP')
+        data=requests.get('https://www.alphavantage.co/query?function=EMA&symbol='+search_val+'&interval=daily&time_period=9&series_type=close&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Technical Analysis: EMA']
         df=pd.DataFrame(columns=['date','EMA'])
@@ -178,10 +178,11 @@ class TimeSeriesDailyAdjusted(APIView):
             data_row=[date,float(p['EMA'])]
             df.loc[-1,:]=data_row
             df.index=df.index+1
-        dataEMA1=df.sort_values('date')
+        dfEMA1=df.head(99)
+        dataEMA1=dfEMA1.sort_values('date')
 
 
-        data=requests.get('https://www.alphavantage.co/query?function=EMA&symbol='+search_val+'&interval=weekly&time_period=26&series_type=open&apikey=6G6EDTRGV2N1F9SP')
+        data=requests.get('https://www.alphavantage.co/query?function=EMA&symbol='+search_val+'&interval=daily&time_period=26&series_type=close&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
         data=data['Technical Analysis: EMA']
         df=pd.DataFrame(columns=['date','EMA'])
@@ -190,7 +191,8 @@ class TimeSeriesDailyAdjusted(APIView):
             data_row=[date,float(p['EMA'])]
             df.loc[-1,:]=data_row
             df.index=df.index+1
-        dataEMA2=df.sort_values('date')
+        dfEMA2=df.head(99)
+        dataEMA2=dfEMA2.sort_values('date')
 
 
         # os.remove("tweets1234.json")
@@ -246,17 +248,12 @@ class TimeSeriesDailyAdjusted(APIView):
             line = f.read()  # read only the first tweet/line
             
             tweet = json.loads(line) # load it as Python dict
-            print(type(tweet))
             msg = tweet['messages']
-            print(type(msg))
             #loop in through msg by indexes to get all messages
             #message[body] will give you tweet text
             message = msg[0]
-            print(type(message))
             ent = message['entities']
-            print(type(ent))
             sentiment = ent['sentiment']
-            print(type(sentiment))
             bulltotal = list()
             beartotal = list()
             neutraltotal = list()
