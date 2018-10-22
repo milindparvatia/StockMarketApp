@@ -58,7 +58,7 @@ class CompanyListView(APIView):
 
 def get_name(request):
     # if this is a POST request we need to process the form data
-    if request.GET.get('tvwidgetsymbol'):
+    if request.method == 'GET':
         # create a form instance and populate it with data from the request:
         dataval = request.GET['tvwidgetsymbol']
         # process the data in form.cleaned_data as required
@@ -97,17 +97,6 @@ class TimeSeriesDailyAdjusted(APIView):
         main_df=df.sort_values('date')  
         main_df.set_index("date", inplace=True)
 
-        # data=requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol='+search_val+'&outputsize=compact&apikey=6G6EDTRGV2N1F9SP')
-        # data=data.json()
-        # data=data['Time Series (Daily)']
-        # df=pd.DataFrame(columns=['date','open','high','low','close','volume'])
-        # for d,p in data.items():
-        #     if float(p['3. low'])!=0:
-        #         date=datetime.datetime.strptime(d,'%Y-%m-%d')
-        #         data_row=[date,float(p['1. open']),float(p['2. high']),float(p['3. low']),float(p['4. close']),int(p['6. volume'])]
-        #         df.loc[-1,:]=data_row
-        #         df.index=df.index+1
-        # main_df['date'] = main_df['date'].dt.strftime('%Y%m%d')
         x,y=[],[]
         columns=['open','high','low','close','volume']
 
@@ -158,140 +147,94 @@ class TimeSeriesDailyAdjusted(APIView):
         yplotDF.columns = ['open','high','low','close','volume','date']
         ytestDF.columns = ['open','high','low','close','volume','date']
         
-        data=requests.get('https://www.alphavantage.co/query?function=EMA&symbol='+search_val+'&interval=daily&time_period=9&series_type=close&apikey=6G6EDTRGV2N1F9SP')
+        data=requests.get('https://www.alphavantage.co/query?function=SMA&symbol='+search_val+'&interval=daily&time_period=9&series_type=close&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
-        data=data['Technical Analysis: EMA']
-        df=pd.DataFrame(columns=['date','EMA'])
+        data=data['Technical Analysis: SMA']
+        df=pd.DataFrame(columns=['date','SMA'])
         for d,p in data.items():
             date=datetime.datetime.strptime(d,'%Y-%m-%d')
-            data_row=[date,float(p['EMA'])]
+            data_row=[date,float(p['SMA'])]
             df.loc[-1,:]=data_row
             df.index=df.index+1
-        dfEMA1=df.head(100)
-        dataEMA1=dfEMA1.sort_values('date')
+        dfSMA1=df.head(100)
+        dataSMA1=dfSMA1.sort_values('date')
 
-
-        data=requests.get('https://www.alphavantage.co/query?function=EMA&symbol='+search_val+'&interval=daily&time_period=26&series_type=close&apikey=6G6EDTRGV2N1F9SP')
+        data=requests.get('https://www.alphavantage.co/query?function=SMA&symbol='+search_val+'&interval=daily&time_period=26&series_type=close&apikey=6G6EDTRGV2N1F9SP')
         data=data.json()
-        data=data['Technical Analysis: EMA']
-        df=pd.DataFrame(columns=['date','EMA'])
+        data=data['Technical Analysis: SMA']
+        df=pd.DataFrame(columns=['date','SMA'])
         for d,p in data.items():
             date=datetime.datetime.strptime(d,'%Y-%m-%d')
-            data_row=[date,float(p['EMA'])]
+            data_row=[date,float(p['SMA'])]
             df.loc[-1,:]=data_row
             df.index=df.index+1
-        dfEMA2=df.head(100)
-        dataEMA2=dfEMA2.sort_values('date')
+        dfSMA2=df.head(100)
+        dataSMA2=dfSMA2.sort_values('date')
 
-
-        # os.remove("tweets1234.json")
-        # Array = search_val.split(":")
-        # value = Array[1]
-        # os.system('twitterscraper #'+value+' --limit 50 -bd 2018-09-17 -ed 2018-09-20 --output=tweets1234.json')
-        # punctuation = list(string.punctuation)
-        # stop = stopwords.words('english') + punctuation + ['rt', 'via']
-        
-        # with open('tweets1234.json', 'r') as f:
-        #     line = f.read() # read only the first tweet/line
-        #     total = list()
-        #     sentiment = 0.0
-        #     pos = 0.0
-        #     neg = 0.0
-        #     tweet = json.loads(line) # load it as Python dict
-        #     type(tweet)
-        #     for key in tweet:
-        #         snt = analyser.polarity_scores(key['text'])
-        #         sentiment = sentiment + snt['compound']
-        #         pos = pos + snt['pos']
-        #         neg = neg + snt['neg']
-        #         terms_stop = [term for term in word_tokenize(key['text']) if term not in stop] #Using Nltk to tokenize
-        #         total.extend(terms_stop)
-        
-        # for key in total:
-        #     if(len(key) < 3):
-        #         total.remove(key)
-
-        # for i in range(len(total)):
-        #     total[i] = total[i].lower()
-        # f.close()
-
-        
-        # sentiment=str(sentiment)
-        # str(neg)
-        # str(pos)
-
-        def leaders(xs, top=20):
+        def leaders(xs, top=500):
             counts = defaultdict(int)
             for x in xs:
                 counts[x] += 1
             return sorted(counts.items(), reverse=True, key=lambda tup: tup[1])[:top]
 
-        response = requests.get("https://api.stocktwits.com/api/2/streams/symbol/GOOG.json")
-
-        dat = response.json()
-
-        with open("data5.json","w") as outfile:
-            json.dump(dat,outfile)
+        os.remove("tweets1234.json")
+        os.system('twitterscraper #'+search_val+' --limit 100 -bd 2018-01-10 -ed 2018-09-20 --output=tweets1234.json')
+        punctuation = list(string.punctuation)
+        stop = stopwords.words('english') + punctuation + ['rt', 'via']
             
-        with open('data5.json', 'r') as f:
-            line = f.read()  # read only the first tweet/line
-            
-            tweet = json.loads(line) # load it as Python dict
-            msg = tweet['messages']
-            #loop in through msg by indexes to get all messages
-            #message[body] will give you tweet text
-            message = msg[0]
-            ent = message['entities']
-            sentiment = ent['sentiment']
-            bulltotal = list()
-            beartotal = list()
-            neutraltotal = list()
+        with open('tweets1234.json', 'r') as f:
+            line = f.read() # read only the first tweet/line
+            total = list()
             sentiment = 0.0
             pos = 0.0
             neg = 0.0
-            count = 0
-
-            punctuation = list(string.punctuation)
-            stop = stopwords.words('english') + punctuation + ['rt', 'via']
+            tweet = json.loads(line) # load it as Python dict
+            type(tweet)
+            for key in tweet:
+                terms_stop = [term for term in word_tokenize(key['text']) if term not in stop] #Using Nltk to tokenize
+                total.extend(terms_stop)
             
-            for tweets in msg:
-                text = tweets['body']  #Actual message
-                count = count + 1
-                #Analyser
-                snt = analyser.polarity_scores(text)
-                sentiment = sentiment + snt['compound']
-                pos = pos + snt['pos']
-                neg = neg + snt['neg']
-                entity = tweets['entities']
-                sentiments = entity['sentiment']
-                #print(text)
+        for key in total:
+            if(len(key) < 3):
+                total.remove(key)
 
-                if(bool(sentiments)):
-                    if(sentiments['basic'] == 'Bullish'):
-                        terms_stop = [term for term in word_tokenize(text) if term not in stop]  # Using Nltk to tokenize
-                        bulltotal.extend(terms_stop)
-                    else:
-                        terms_stop = [term for term in word_tokenize(text) if term not in stop]  # Using Nltk to tokenize
-                        beartotal.extend(terms_stop)
-                else:
-                    terms_stop = [term for term in word_tokenize(text) if term not in stop]  # Using Nltk to tokenize
-                    neutraltotal.extend(terms_stop)        
+        for i in range(len(total)):
+            total[i] = total[i].lower()
+
+        with open('bulltest.json','r') as temp:
+            bull = json.load(temp)
+
+        with open('beartest.json', 'r') as temp:
+            bear = json.load(temp)
+
         f.close()
-        
-        # freq1 = leaders(bulltotal)
-        # freq2 = leaders(beartotal)
-        # freq3 = leaders(neutraltotal)
+        sentpos = 0.0
+        sentneg = 0.0
 
-        sentimentData = sentiment/count
+        freq = leaders(total)
+
+        for key1 in freq:
+            for key2 in bull:
+                if(key1[0].lower() == key2[0].lower()):
+                    sentpos = sentpos + (key2[1] * key1[1])
+            for key3 in bear:
+                if(key1[0].lower() == key3[0].lower()):
+                    sentneg = sentneg - (key3[1] * key1[1]) 
+        # print(freq)
+        sentpos = sentpos
+        sentneg = sentneg
+        sentiment = sentpos+sentneg
+
+        sentimentData = sentiment
         predict = yplotDF
         original = ytestDF
-        defaultEMA1 = dataEMA1
-        defaultEMA2 = dataEMA2
+        defaultSMA1 = dataSMA1
+        defaultSMA2 = dataSMA2
         defaultDaily = dataDaily
         alldata = {
             "defaultDaily": defaultDaily,
-            "defaultEMA2":defaultEMA2,
-            "defaultEMA1":defaultEMA1,
+            "defaultSMA2":defaultSMA2,
+            "defaultSMA1":defaultSMA1,
             "predict":predict,
             "original":original,
             "sentiment": sentimentData,
