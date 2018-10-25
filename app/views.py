@@ -5,16 +5,13 @@ from django.contrib.auth import authenticate, login
 from django.views.generic import View   
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, PolynomialFeatures
 from sklearn.linear_model import Ridge
-from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
 import requests, string, os, re, io, datetime
 import pandas as pd
 import urllib3, json
 import urllib3.request as urllib3
-import numpy as np
 from .forms import NameForm
 from twitterscraper import query_tweets
 from urllib.parse import unquote
@@ -110,7 +107,7 @@ class TimeSeriesDailyAdjusted(APIView):
                 y[i]=y[i+1]
             
             y=y.shift(1, freq='D')
-
+            
             x_train=x[0:90]  
             x_test=x[90:100]
             y_train=y[0:90]
@@ -178,7 +175,7 @@ class TimeSeriesDailyAdjusted(APIView):
             return sorted(counts.items(), reverse=True, key=lambda tup: tup[1])[:top]
 
         os.remove("tweets1234.json")
-        os.system('twitterscraper #'+search_val+' --limit 100 -bd 2018-01-10 -ed 2018-09-20 --output=tweets1234.json')
+        os.system('twitterscraper #AAPL --limit 100 -bd 2018-01-10 -ed 2018-09-20 --output=tweets1234.json')
         punctuation = list(string.punctuation)
         stop = stopwords.words('english') + punctuation + ['rt', 'via']
             
@@ -225,7 +222,18 @@ class TimeSeriesDailyAdjusted(APIView):
         sentneg = sentneg
         sentiment = sentpos+sentneg
 
-        sentimentData = sentiment
+        if sentpos > (-2*(sentneg)):
+            sent2 = 162
+        elif sentpos > (-1*(sentneg)):
+            sent2 = 126
+        elif sentpos < (-2*(sentneg)):
+            sent2 = 18
+        elif sentpos < (-1*(sentneg)):
+            sent2 = 54
+        else:
+            sent2 = 90
+
+        sentimentData = sent2
         predict = yplotDF
         original = ytestDF
         defaultSMA1 = dataSMA1
@@ -240,7 +248,6 @@ class TimeSeriesDailyAdjusted(APIView):
             "sentiment": sentimentData,
         }
         return Response(alldata)
-
 
 def search(request):
     return render(request,'app/search.html')

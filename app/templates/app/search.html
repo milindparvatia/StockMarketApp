@@ -88,8 +88,7 @@
 
             function set_prid_orig() {
                 var trace1 = {
-                    x: pred.date, 
-                    
+                    x: pred.date,
                     open:  pred.open,
                     high:  pred.high,
                     low:  pred.low,
@@ -124,7 +123,10 @@
                     };
 
                 var layout = {
-                title: 'prediction'
+                title: 'Prediction Chart',
+                "titlefont": {
+                        "size": 30,
+                    },
                 };
 
                 var data = [trace1,trace2];
@@ -134,7 +136,7 @@
 
             function setGauge(){
                 // Enter a speed between 0 and 180
-                var level = (sentiment)*360;
+                var level = (sentiment);
 
                 // Trig to calc meter point
                 var degrees = 180 - level,
@@ -155,7 +157,7 @@
                     {   
                         type: 'scatter',
                         x: [0], y:[0],
-                        marker: {size: 10, color:'850000'},
+                        marker: {size: 28, color:'850000'},
                         showlegend: false,
                         name: 'Analysis',
                         text: level,
@@ -185,7 +187,10 @@
                         color: '850000'
                     }
                     }],
-                title: 'Tweeter Analysis',
+                title: 'Twitter Analysis',
+                "titlefont": {
+                        "size": 30,
+                    },
                 xaxis: {zeroline:false, showticklabels:false,
                             showgrid: false, range: [-1, 1]},
                 yaxis: {zeroline:false, showticklabels:false,
@@ -196,27 +201,27 @@
             }
             
             function setCharts(){
+                
             var trace1 = {
             x: defaultData.date, 
             close: defaultData.close, 
-            decreasing: {line: {color: '#7F7F7F'}}, 
+            decreasing: {line: {color: '#e60000'}}, 
             high:  defaultData.high,
-            increasing: {line: {color: '#17BECF'}}, 
-            line: {color: 'rgba(31,119,180,1)'}, 
+            increasing: {line: {color: '#00cc00'}},
             low:  defaultData.low,
             open:  defaultData.open,
             type: 'candlestick', 
             xaxis: 'x', 
             yaxis: 'y',
-            name:'candlestick'
+            name:'Candle Stick'
             };
             var trace2 = {
                 x: defaultDataSMA1.date,
                 y: defaultDataSMA1.SMA,
-                line:{width: 1},
+                line:{width: 1.5},
                 marker:{color: '#ED0707'},
                 mode:'lines',
-                name:'MA-9',
+                name:'Moving Avg-9',
                 type:'scatter',
                 yaxis:'y'
 
@@ -224,10 +229,10 @@
             var trace3 = {
                 x: defaultDataSMA2.date,
                 y: defaultDataSMA2.SMA,
-                line:{width: 1},
-                marker:{color: '#000000'},
+                line:{width: 1.5},
+                marker:{color: '#2e2eb8'},
                 mode:'lines',
-                name:'MA-26',
+                name:'Moving Avg-26',
                 type:'scatter',
                 yaxis:'y'
 
@@ -236,7 +241,9 @@
                 x: defaultData.date,
                 y: defaultData.close,
                 type: 'scatter',
-                name:'line chart'
+                name:'Line Chart',
+                marker:{color: '#6b6b47'},
+                line:{width: 2}
             }
             var data = [trace1,trace2,trace3,trace4];
             
