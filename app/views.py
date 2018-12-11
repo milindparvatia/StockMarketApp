@@ -168,72 +168,72 @@ class TimeSeriesDailyAdjusted(APIView):
         dfSMA2=df.head(100)
         dataSMA2=dfSMA2.sort_values('date')
 
-        def leaders(xs, top=500):
-            counts = defaultdict(int)
-            for x in xs:
-                counts[x] += 1
-            return sorted(counts.items(), reverse=True, key=lambda tup: tup[1])[:top]
+        # def leaders(xs, top=500):
+        #     counts = defaultdict(int)
+        #     for x in xs:
+        #         counts[x] += 1
+        #     return sorted(counts.items(), reverse=True, key=lambda tup: tup[1])[:top]
 
-        os.remove("tweets1234.json")
-        os.system('twitterscraper #AAPL --limit 100 -bd 2018-01-10 -ed 2018-09-20 --output=tweets1234.json')
-        punctuation = list(string.punctuation)
-        stop = stopwords.words('english') + punctuation + ['rt', 'via']
+        # os.remove("tweets1234.json")
+        # os.system('twitterscraper #AAPL --limit 100 -bd 2018-01-10 -ed 2018-09-20 --output=tweets1234.json')
+        # punctuation = list(string.punctuation)
+        # stop = stopwords.words('english') + punctuation + ['rt', 'via']
             
-        with open('tweets1234.json', 'r') as f:
-            line = f.read() # read only the first tweet/line
-            total = list()
-            sentiment = 0.0
-            pos = 0.0
-            neg = 0.0
-            tweet = json.loads(line) # load it as Python dict
-            type(tweet)
-            for key in tweet:
-                terms_stop = [term for term in word_tokenize(key['text']) if term not in stop] #Using Nltk to tokenize
-                total.extend(terms_stop)
+        # with open('tweets1234.json', 'r') as f:
+        #     line = f.read() # read only the first tweet/line
+        #     total = list()
+        #     sentiment = 0.0
+        #     pos = 0.0
+        #     neg = 0.0
+        #     tweet = json.loads(line) # load it as Python dict
+        #     type(tweet)
+        #     for key in tweet:
+        #         terms_stop = [term for term in word_tokenize(key['text']) if term not in stop] #Using Nltk to tokenize
+        #         total.extend(terms_stop)
             
-        for key in total:
-            if(len(key) < 3):
-                total.remove(key)
+        # for key in total:
+        #     if(len(key) < 3):
+        #         total.remove(key)
 
-        for i in range(len(total)):
-            total[i] = total[i].lower()
+        # for i in range(len(total)):
+        #     total[i] = total[i].lower()
 
-        with open('bulltest.json','r') as temp:
-            bull = json.load(temp)
+        # with open('bulltest.json','r') as temp:
+        #     bull = json.load(temp)
 
-        with open('beartest.json', 'r') as temp:
-            bear = json.load(temp)
+        # with open('beartest.json', 'r') as temp:
+        #     bear = json.load(temp)
 
-        f.close()
-        sentpos = 0.0
-        sentneg = 0.0
+        # f.close()
+        # sentpos = 0.0
+        # sentneg = 0.0
 
-        freq = leaders(total)
+        # freq = leaders(total)
 
-        for key1 in freq:
-            for key2 in bull:
-                if(key1[0].lower() == key2[0].lower()):
-                    sentpos = sentpos + (key2[1] * key1[1])
-            for key3 in bear:
-                if(key1[0].lower() == key3[0].lower()):
-                    sentneg = sentneg - (key3[1] * key1[1]) 
-        # print(freq)
-        sentpos = sentpos
-        sentneg = sentneg
-        sentiment = sentpos+sentneg
+        # for key1 in freq:
+        #     for key2 in bull:
+        #         if(key1[0].lower() == key2[0].lower()):
+        #             sentpos = sentpos + (key2[1] * key1[1])
+        #     for key3 in bear:
+        #         if(key1[0].lower() == key3[0].lower()):
+        #             sentneg = sentneg - (key3[1] * key1[1]) 
+        # # print(freq)
+        # sentpos = sentpos
+        # sentneg = sentneg
+        # sentiment = sentpos+sentneg
 
-        if sentpos > (-2*(sentneg)):
-            sent2 = 162
-        elif sentpos > (-1*(sentneg)):
-            sent2 = 126
-        elif sentpos < (-2*(sentneg)):
-            sent2 = 18
-        elif sentpos < (-1*(sentneg)):
-            sent2 = 54
-        else:
-            sent2 = 90
+        # if sentpos > (-2*(sentneg)):
+        #     sent2 = 162
+        # elif sentpos > (-1*(sentneg)):
+        #     sent2 = 126
+        # elif sentpos < (-2*(sentneg)):
+        #     sent2 = 18
+        # elif sentpos < (-1*(sentneg)):
+        #     sent2 = 54
+        # else:
+        #     sent2 = 90
 
-        sentimentData = sent2
+        # sentimentData = sent2
         predict = yplotDF
         original = ytestDF
         defaultSMA1 = dataSMA1
@@ -245,7 +245,7 @@ class TimeSeriesDailyAdjusted(APIView):
             "defaultSMA1":defaultSMA1,
             "predict":predict,
             "original":original,
-            "sentiment": sentimentData,
+            # "sentiment": sentimentData,
         }
         return Response(alldata)
 
