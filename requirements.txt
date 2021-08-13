@@ -11,7 +11,7 @@ Django==2.2.24
 django-filter==2.0.0
 django-heroku==0.3.1
 django-rest-framework==0.1.0
-djangorestframework==3.9.1
+djangorestframework==3.11.2
 gast==0.2.0
 grpcio==1.15.0
 gunicorn==19.9.0
