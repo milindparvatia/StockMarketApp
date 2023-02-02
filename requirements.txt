@@ -37,6 +37,6 @@ tornado==5.1
 twitterscraper==0.9.0
 urllib3==1.26.5
 vaderSentiment==3.2.1
-Werkzeug==0.15.3
+Werkzeug==0.15.5
 whitenoise==4.1
 wincertstore==0.2
